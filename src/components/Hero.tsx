@@ -1,65 +1,94 @@
-import { ButtonLink, Container, Eyebrow, FlowDiagram } from "./ui";
+import { CheckIcon } from "./icons";
+import { ButtonLink, Chip, Container, Steps, Window } from "./ui";
+
+const log: { t: string; text: string; chip?: { tone: "amber" | "ok"; label: string } }[] = [
+  { t: "10:02", text: "Patient cancels Thu 2:00 PM with Dr. Example", chip: { tone: "amber", label: "Slot open" } },
+  { t: "10:02", text: "Waitlist checked: 3 patients ranked by distance and urgency" },
+  { t: "10:03", text: "Assistant calls the best match" },
+  { t: "10:04", text: "Patient accepts, calendar updated", chip: { tone: "ok", label: "Filled" } },
+  { t: "10:04", text: "Intake link and reminder sent" },
+];
 
 export default function Hero() {
   return (
-    <section className="bg-gradient-to-b from-surface to-white pb-16 pt-16 md:pb-[72px] md:pt-[88px]">
-      <Container className="grid items-center gap-12 md:grid-cols-[1.1fr_0.9fr]">
-        <div>
-          <Eyebrow>AI front desk for clinics</Eyebrow>
-          <h1 className="text-[clamp(2.1rem,5vw,3.5rem)] font-extrabold leading-[1.15] tracking-tight text-primary">
-            An AI front desk that books visits and refills cancelled slots
-          </h1>
-          <p className="mb-3 mt-[18px] text-[1.15rem] font-semibold text-primary">
-            Stop watching good appointment slots go to waste.
-          </p>
-          <p className="max-w-[640px] text-[1.1rem] text-body">
-            Your assistant picks up every call, books the visit, gathers medical and insurance
-            details, and rings the next person on your waitlist the moment a patient cancels.
-          </p>
-          <ul className="mb-7 mt-5">
-            {["No manual call-backs", "No idle appointment slots", "No swamped reception desk"].map((t) => (
-              <li key={t} className="relative my-1 pl-[26px] font-medium text-body">
-                <span aria-hidden className="absolute left-0 font-bold text-accent">
-                  ✕
-                </span>
-                {t}
-              </li>
-            ))}
-          </ul>
-          <div className="flex flex-wrap gap-3">
-            <ButtonLink href="#demo">Request a Demo</ButtonLink>
-            <ButtonLink href="#how" variant="outline">
-              See How It Works
-            </ButtonLink>
+    <>
+      <section id="top" className="pb-20 pt-14 md:pb-28 md:pt-24">
+        <Container className="grid items-center gap-14 lg:grid-cols-[1fr_1.05fr] lg:gap-16">
+          <div>
+            <p className="mb-6 text-sm font-semibold text-accent">AI front desk for clinics</p>
+            <h1 className="text-[clamp(2.4rem,5.4vw,4rem)] font-semibold leading-[1.04] tracking-tight">
+              Books visits and refills cancelled slots, on its own.
+            </h1>
+            <p className="mt-6 max-w-[48ch] text-lg leading-relaxed text-body sm:text-xl">
+              Your assistant picks up every call, books the visit, gathers medical and insurance details,
+              and rings the next person on your waitlist the moment a patient cancels.
+            </p>
+            <div className="mt-9 flex flex-wrap items-center gap-3">
+              <ButtonLink href="#demo" arrow>
+                Request a demo
+              </ButtonLink>
+              <ButtonLink href="#how" variant="secondary">
+                See how it works
+              </ButtonLink>
+            </div>
+            <ul className="mt-10 space-y-2 text-[0.95rem] text-body">
+              {["No manual call-backs", "No idle appointment slots", "No swamped reception desk"].map((t) => (
+                <li key={t} className="flex items-center gap-2.5">
+                  <CheckIcon className="size-5 shrink-0 text-accent" />
+                  {t}
+                </li>
+              ))}
+            </ul>
           </div>
-        </div>
 
-        {/* Placeholder: replace with your own photo or product shot. */}
-        <div
-          role="img"
-          aria-label="Placeholder for hero image"
-          className="reveal grid aspect-[4/3] place-items-center rounded-2xl bg-gradient-to-br from-primary via-[#1d5a8a] to-accent p-6 text-center font-semibold text-white shadow-card"
-        >
-          Hero image placeholder
-          <br />
-          (replace with your own photo)
-        </div>
-      </Container>
+          <Window title="Front desk activity" tag="Sample data">
+            <div className="flex items-center justify-between gap-4 border-b border-line px-5 py-4">
+              <div>
+                <p className="text-xs font-medium text-subtle">Appointment</p>
+                <p className="font-display text-lg font-semibold">Thu 2:00 PM · Dr. Example</p>
+              </div>
+              <Chip tone="ok" check>
+                Filled
+              </Chip>
+            </div>
+            <ol className="divide-y divide-line">
+              {log.map((r, i) => (
+                <li
+                  key={r.text}
+                  className="log-row flex items-start gap-4 px-5 py-3.5 text-[0.95rem]"
+                  style={{ "--i": i } as React.CSSProperties}
+                >
+                  <span className="tnum w-11 shrink-0 pt-px text-subtle">{r.t}</span>
+                  <span className="flex-1 text-ink">{r.text}</span>
+                  {r.chip && (
+                    <Chip tone={r.chip.tone} check={r.chip.tone === "ok"}>
+                      {r.chip.label}
+                    </Chip>
+                  )}
+                </li>
+              ))}
+            </ol>
+            <p className="border-t border-line bg-paper px-5 py-3 text-sm text-subtle">
+              Cancellation to confirmed booking: <span className="tnum font-semibold text-ink">2 minutes</span>
+            </p>
+          </Window>
+        </Container>
+      </section>
 
-      <Container className="mt-10 scroll-mt-24" >
-        <div id="how">
-          <FlowDiagram
+      <section id="how" className="border-y border-line bg-surface py-16 md:py-20">
+        <Container>
+          <Steps
             label="How a cancelled slot gets refilled"
             steps={[
               { title: "Cancel", sub: "Patient cancels" },
               { title: "Match", sub: "Waitlist checked" },
-              { title: "Call", sub: "AI phones patient" },
+              { title: "Call", sub: "Assistant phones the patient" },
               { title: "Accept", sub: "Patient confirms" },
               { title: "Filled", sub: "Slot recovered" },
             ]}
           />
-        </div>
-      </Container>
-    </section>
+        </Container>
+      </section>
+    </>
   );
 }

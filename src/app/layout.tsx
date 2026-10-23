@@ -1,9 +1,19 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import { Figtree, Noto_Sans } from "next/font/google";
+import Footer from "@/components/Footer";
+import Header from "@/components/Header";
 import "./globals.css";
 
-const inter = Inter({
-  variable: "--font-inter",
+// Pairing from the UI/UX Pro Max "Medical Clean" typography entry: Figtree for
+// headings, Noto Sans for body. Both are self-hosted by next/font (no layout shift).
+const figtree = Figtree({
+  variable: "--font-figtree",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const noto = Noto_Sans({
+  variable: "--font-noto",
   subsets: ["latin"],
   display: "swap",
 });
@@ -22,13 +32,23 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0f2e52",
+  themeColor: "#fbfaf7",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${inter.variable} antialiased`}>
-      <body>{children}</body>
+    <html lang="en" className={`${figtree.variable} ${noto.variable} antialiased`}>
+      <body>
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-md focus:bg-ink focus:px-4 focus:py-3 focus:text-sm focus:font-semibold focus:text-white"
+        >
+          Skip to content
+        </a>
+        <Header />
+        <main id="main">{children}</main>
+        <Footer />
+      </body>
     </html>
   );
 }

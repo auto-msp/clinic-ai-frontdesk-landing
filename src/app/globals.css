@@ -1,24 +1,83 @@
 @import "tailwindcss";
 
+/*
+ * Design tokens. Direction: calm clinical editorial (Minimalism / Swiss style
+ * per the UI/UX Pro Max search): warm paper, deep ink, ONE accent, hairline
+ * rules instead of boxed cards, no gradients.
+ * Contrast (WCAG AA, computed): ink on paper 15.1:1, body 8.4:1, subtle 5.5:1,
+ * accent 5.0:1, white on accent 5.2:1, accent-bright on ink 9.1:1.
+ */
 @theme inline {
-  --color-primary: #0f2e52;
-  --color-accent: #0bb8b0;
-  --color-sky: #d9f6f7;
-  --color-muted: #f4f6f8;
-  --color-surface: #f6f9fc;
-  --color-line: #e1e6ec;
-  --color-ink: #1a1a1a;
-  --color-body: #4a4a4a;
-  --color-ok-bg: #e3f8ee;
-  --color-ok-line: #b5e8d1;
-  --color-ok: #12805a;
-  --font-sans: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --shadow-card: 0 10px 30px -12px rgb(15 46 82 / 0.25);
+  --color-paper: #fbfaf7;
+  --color-surface: #ffffff;
+  --color-ink: #10243a;
+  --color-body: #3f4c5a;
+  --color-subtle: #5b6876;
+  --color-line: #e6e2d9;
+  --color-line-strong: #cfcabd;
+  --color-accent: #0b7a75;
+  --color-accent-hover: #086561;
+  --color-accent-soft: #e3f1ef;
+  --color-accent-bright: #6fd6cd; /* accent on dark (ink) backgrounds */
+  --color-ok: #1b6e4a;
+  --color-ok-soft: #e4f2ea;
+  --color-amber: #8a5a00;
+  --color-amber-soft: #fbf0d9;
+
+  --font-sans: var(--font-noto), system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: var(--font-figtree), system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --shadow-window:
+    0 1px 0 rgb(16 36 58 / 0.04), 0 28px 56px -28px rgb(16 36 58 / 0.28);
+}
+
+:root {
+  color-scheme: light;
 }
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 5rem;
+  scroll-padding-top: 5.5rem;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-body);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.65;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  color: var(--color-ink);
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+/* Every interactive control gets the same visible keyboard focus ring. */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+a,
+button,
+summary,
+label[for] {
+  cursor: pointer;
+}
+
+/* Tabular figures for any numeric UI (times, counts, distances). */
+.tnum {
+  font-variant-numeric: tabular-nums;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -27,19 +86,24 @@ html {
   }
 }
 
-body {
-  background: #fff;
-  color: var(--color-ink);
-  font-family: var(--font-sans);
-  line-height: 1.6;
-}
-
-/* Scroll reveal: pure CSS, progressive enhancement. Browsers without
-   scroll-driven animations simply show the content. */
-@keyframes reveal-in {
+/* Motion, kept to two purposeful moments: section content easing in as it
+   enters the viewport, and the hero's activity log playing through once.
+   Both are progressive enhancements with a fully visible fallback. */
+@keyframes rise-in {
   from {
     opacity: 0;
-    transform: translateY(18px);
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes log-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
   }
   to {
     opacity: 1;
@@ -49,12 +113,16 @@ body {
 
 @media (prefers-reduced-motion: no-preference) {
   @supports (animation-timeline: view()) {
-    .reveal {
-      /* `forwards` (not `both`): content outside the entry range stays visible,
-         so full-page captures, print and no-scroll contexts never show blanks. */
-      animation: reveal-in linear forwards;
+    .rise {
+      animation: rise-in linear forwards;
       animation-timeline: view();
-      animation-range: entry 0% entry 35%;
+      animation-range: entry 0% entry 30%;
     }
   }
+
+  .log-row {
+    animation: log-in 420ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+    animation-delay: calc(var(--i, 0) * 520ms + 300ms);
+  }
+
 }

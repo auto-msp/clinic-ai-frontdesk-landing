@@ -1,5 +1,3 @@
-import Footer from "@/components/Footer";
-import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import {
   Audience,
@@ -19,23 +17,19 @@ import {
 export default function Home() {
   return (
     <>
-      <Header />
-      <main id="top">
-        <Hero />
-        <Problem />
-        <WaitlistCalling />
-        <Receptionist />
-        <MedicalIntake />
-        <InsuranceIntake />
-        <Scheduling />
-        <NoShow />
-        <Dashboard />
-        <Security />
-        <Audience />
-        <Impact />
-        <Demo />
-      </main>
-      <Footer />
+      <Hero />
+      <Problem />
+      <WaitlistCalling />
+      <Receptionist />
+      <MedicalIntake />
+      <InsuranceIntake />
+      <Scheduling />
+      <NoShow />
+      <Dashboard />
+      <Security />
+      <Audience />
+      <Impact />
+      <Demo />
     </>
   );
 }

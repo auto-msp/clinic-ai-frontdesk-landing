@@ -1,44 +1,83 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useId, useState, type FormEvent } from "react";
+
+const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 /**
  * Front-end only. Replace the body of `onSubmit` with a call to your backend or
  * CRM (for example a Next.js server action or a route handler) before launch.
+ *
+ * Validation runs on blur and on submit (not on every keystroke) and the error
+ * is announced via aria-describedby + role="alert".
  */
 export default function WaitlistForm() {
+  const id = useId();
+  const [value, setValue] = useState("");
+  const [error, setError] = useState("");
   const [done, setDone] = useState(false);
+
+  function validate(v: string) {
+    if (!v.trim()) return "Enter your work email.";
+    if (!EMAIL.test(v.trim())) return "Enter a valid email, like you@clinic.com.";
+    return "";
+  }
 
   function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    e.currentTarget.reset();
+    const msg = validate(value);
+    setError(msg);
+    if (msg) {
+      document.getElementById(`${id}-email`)?.focus();
+      return;
+    }
+    setValue("");
     setDone(true);
   }
 
+  const helpId = `${id}-help`;
+  const errId = `${id}-error`;
+
   return (
-    <>
-      <form onSubmit={onSubmit} className="mx-auto mt-5 flex max-w-[460px] flex-col gap-2.5 sm:flex-row">
-        <label htmlFor="wl-email" className="sr-only">
-          Work email
-        </label>
-        <input
-          id="wl-email"
-          type="email"
-          required
-          autoComplete="email"
-          placeholder="you@clinic.com"
-          className="flex-1 rounded-lg border-[1.5px] border-line px-3.5 py-3 text-ink focus:outline-2 focus:outline-accent"
-        />
-        <button
-          type="submit"
-          className="rounded-lg border-[1.5px] border-primary px-6 py-3 font-semibold text-primary transition hover:bg-primary hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-        >
-          Join the Waitlist
-        </button>
-      </form>
-      <p role="status" className="mt-3 min-h-6 font-semibold text-ok">
-        {done ? "Thanks, you're on the list." : ""}
+    <form onSubmit={onSubmit} noValidate className="mt-6">
+      <label htmlFor={`${id}-email`} className="mb-2 block text-sm font-semibold text-ink">
+        Work email
+      </label>
+      <input
+        id={`${id}-email`}
+        type="email"
+        name="email"
+        autoComplete="email"
+        inputMode="email"
+        placeholder="you@clinic.com"
+        value={value}
+        aria-invalid={error ? true : undefined}
+        aria-describedby={error ? `${helpId} ${errId}` : helpId}
+        onChange={(e) => {
+          setValue(e.target.value);
+          setDone(false);
+          if (error) setError("");
+        }}
+        onBlur={() => value && setError(validate(value))}
+        className={`min-h-12 w-full rounded-lg border bg-paper px-4 text-base text-ink placeholder:text-subtle focus:bg-surface ${error ? "border-[#b42318]" : "border-line-strong"}`}
+      />
+      <p id={helpId} className="mt-2 text-sm text-subtle">
+        We&apos;ll use it only to reply about your demo.
       </p>
-    </>
+      <p id={errId} role="alert" className="mt-2 min-h-5 text-sm font-medium text-[#b42318]">
+        {error}
+      </p>
+
+      <button
+        type="submit"
+        className="mt-3 inline-flex min-h-12 w-full items-center justify-center rounded-lg bg-accent px-6 text-base font-semibold text-white transition-colors duration-150 hover:bg-accent-hover sm:w-auto"
+      >
+        Request a demo
+      </button>
+
+      <p role="status" className="mt-4 min-h-6 text-[0.95rem] font-medium text-ok">
+        {done ? "Thanks, you're on the list. We'll be in touch." : ""}
+      </p>
+    </form>
   );
 }
