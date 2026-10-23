@@ -8,10 +8,10 @@ export default async function Footer() {
   cacheLife("days");
 
   return (
-    <footer className="bg-[#0a2140] py-9 text-[0.85rem] text-[#9fb3cc]">
-      <Container className="flex flex-wrap justify-between gap-3">
+    <footer className="border-t border-line bg-paper py-10 text-sm text-subtle">
+      <Container className="flex flex-wrap items-center justify-between gap-3">
         <span>© {new Date().getFullYear()} YourBrand. Template, not an official site.</span>
-        <span>Privacy · Terms · Contact</span>
+        <span>Add your Privacy, Terms and Contact links before launch.</span>
       </Container>
     </footer>
   );
