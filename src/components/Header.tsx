@@ -174,7 +174,7 @@ export default function Header() {
                     <ul
                       id={`menu-${slug(item.label)}`}
                       onKeyDown={(e) => moveInMenu(e, item.label)}
-                      className="absolute left-0 top-full mt-1 w-[21rem] rounded-xl border border-line bg-surface p-2 shadow-window"
+                      className="absolute left-0 top-full mt-1 w-[21rem] rounded-md border border-ink bg-surface p-2 shadow-window"
                     >
                       {item.children.map((c) => (
                         <li key={c.href}>
@@ -182,7 +182,7 @@ export default function Header() {
                             href={c.href}
                             onClick={closeAll}
                             aria-current={pathname === c.href ? "page" : undefined}
-                            className="block rounded-lg px-3 py-2.5 hover:bg-paper aria-[current=page]:bg-accent-soft"
+                            className="block rounded px-3 py-2.5 hover:bg-paper aria-[current=page]:bg-accent-soft"
                           >
                             <span className="block font-semibold text-ink">{c.title}</span>
                             <span className="block text-sm text-subtle">{c.desc}</span>
@@ -233,7 +233,7 @@ export default function Header() {
             <Link
               href="/contact"
               onClick={closeAll}
-              className="flex min-h-12 items-center justify-center rounded-lg bg-accent text-base font-semibold text-white hover:bg-accent-hover"
+              className="flex min-h-12 items-center justify-center rounded-md bg-accent text-base font-semibold text-white hover:bg-accent-hover"
             >
               Join Waitlist
             </Link>
@@ -271,7 +271,7 @@ export default function Header() {
                               href={c.href}
                               onClick={closeAll}
                               aria-current={pathname === c.href ? "page" : undefined}
-                              className="flex min-h-12 flex-col justify-center rounded-lg px-3 text-base hover:bg-surface aria-[current=page]:bg-accent-soft"
+                              className="flex min-h-12 flex-col justify-center rounded px-3 text-base hover:bg-surface aria-[current=page]:bg-accent-soft"
                             >
                               <span className="font-semibold text-ink">{c.title}</span>
                               <span className="text-sm font-normal text-subtle">{c.desc}</span>

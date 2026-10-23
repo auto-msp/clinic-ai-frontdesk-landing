@@ -8,7 +8,9 @@ export default function Hero() {
       <Container className="grid items-center gap-14 pb-16 pt-14 md:pt-20 lg:grid-cols-[1.05fr_1fr] lg:gap-14 lg:pb-24 lg:pt-28">
         <div>
           <p className="t-eyebrow mb-7 text-accent">AI front desk for clinics</p>
-          <h1 className="t-display">Books visits and refills cancelled slots, on its own.</h1>
+          <h1 className="t-display">
+            Books visits and refills cancelled slots, <span className="text-accent">on its own.</span>
+          </h1>
           <p className="t-lead mt-8 max-w-[44ch] text-body">
             Your assistant picks up every call, books the visit, gathers medical and insurance details, and
             rings the next person on your waitlist the moment a patient cancels.

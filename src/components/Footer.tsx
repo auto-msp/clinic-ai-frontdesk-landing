@@ -35,7 +35,7 @@ export default async function Footer() {
             </p>
             <Link
               href="/contact"
-              className="mt-5 inline-flex min-h-11 items-center rounded-lg border border-line-strong px-4 text-[0.95rem] font-semibold text-ink transition-colors hover:border-ink"
+              className="mt-5 inline-flex min-h-11 items-center rounded-md border border-ink px-4 text-[0.95rem] font-semibold text-ink transition-colors hover:bg-ink hover:text-white"
             >
               Join the waitlist
             </Link>

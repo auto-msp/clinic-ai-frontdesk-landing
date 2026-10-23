@@ -363,7 +363,7 @@ export function Demo() {
             in real time.
           </Lead>
         </div>
-        <div className="rise rounded-xl border border-line bg-surface p-6 shadow-window sm:p-8">
+        <div className="rise rounded-md border border-ink bg-surface p-6 shadow-window sm:p-8">
           <h3 className="t-h3">Request a demo or join the waitlist</h3>
           <WaitlistForm />
         </div>

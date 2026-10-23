@@ -233,7 +233,7 @@ function renderBlock(b: Block, tone: Tone, key: number, ctx: { feature: number; 
                 Placeholder contact details. Replace them before launch.
               </p>
             </div>
-            <div className="rounded-xl border border-line bg-surface p-6 shadow-window sm:p-8">
+            <div className="rounded-md border border-ink bg-surface p-6 shadow-window sm:p-8">
               <h2 className="t-h3">Request information</h2>
               <ContactForm />
             </div>
