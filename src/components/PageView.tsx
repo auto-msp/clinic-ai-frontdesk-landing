@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
+import type { ReactNode } from "react";
 import ContactForm from "./ContactForm";
 import { CheckIcon, ChevronDownIcon } from "./icons";
-import { Block, defaultClosing, pages } from "@/content/pages";
+import { Block, PageData, defaultClosing, pages } from "@/content/pages";
+import { CoverageDiagram, DataPathDiagram, GanttDiagram, HubDiagram, IntakeFormDiagram, LayersDiagram, QuoteDiagram } from "./Illustrations";
+import { FrontDeskMock } from "./Mockups";
+import { Layout, StepKind, layouts } from "./pageLayouts";
 import { Dashboard, NoShow, Receptionist, Scheduling, WaitlistCalling } from "./Sections";
 import { ButtonLink, Checks, Container, Editorial, H2, Label, Lead, LinkRows, Row, Section, Steps, TwoCol, Window } from "./ui";
 
@@ -11,6 +15,7 @@ export function pageMetadata(slug: string): Metadata {
 }
 
 const slugify = (s: string) => s.toLowerCase().replace(/\W+/g, "-").replace(/^-|-$/g, "");
+const num = (i: number) => String(i + 1).padStart(2, "0");
 
 /** Heading block shared by the stacked layouts. */
 function SectionHead({ label, title, intro }: { label?: string; title: string; intro?: string }) {
@@ -24,52 +29,164 @@ function SectionHead({ label, title, intro }: { label?: string; title: string; i
 }
 
 type Tone = "plain" | "tint";
+type FeatureBlock = Extract<Block, { kind: "features" }>;
+type StepsBlock = Extract<Block, { kind: "steps" }>;
 
-/**
- * `ctx.feature` counts feature blocks seen so far on the page, so consecutive
- * feature sections alternate between a ruled list and an indexed grid instead
- * of repeating one layout.
- */
-function renderBlock(b: Block, tone: Tone, key: number, ctx: { feature: number; split: number }) {
+/* ---------- features ---------- */
+
+function FeaturesList({ b, tone }: { b: FeatureBlock; tone: Tone }) {
+  return (
+    <Section tone={tone} space="lg">
+      <Editorial head={<SectionHead label={b.label} title={b.title} intro={b.intro} />}>
+        <ol className="border-t border-line-strong">
+          {b.items.map((it, i) => (
+            <li key={it.title} className="grid gap-x-10 gap-y-2 border-b border-line py-7 md:grid-cols-[2.5rem_minmax(0,0.9fr)_minmax(0,1.2fr)]">
+              <span className="t-num text-sm text-accent md:pt-1.5">{num(i)}</span>
+              <h3 className="t-h3">{it.title}</h3>
+              <p className="text-body">{it.body}</p>
+            </li>
+          ))}
+        </ol>
+      </Editorial>
+    </Section>
+  );
+}
+
+function FeaturesIndex({ b, tone }: { b: FeatureBlock; tone: Tone }) {
+  return (
+    <Section tone={tone}>
+      <Container>
+        <SectionHead label={b.label} title={b.title} intro={b.intro} />
+        <ol className={`grid gap-x-10 gap-y-12 ${b.cols === 3 ? "md:grid-cols-3" : "sm:grid-cols-2"}`}>
+          {b.items.map((it, i) => (
+            <li key={it.title}>
+              <span aria-hidden="true" className="t-num block text-5xl text-ghost">
+                {num(i)}
+              </span>
+              <h3 className="t-h3 mb-2 mt-4 border-t-2 border-ink pt-4">{it.title}</h3>
+              <p className="text-body">{it.body}</p>
+            </li>
+          ))}
+        </ol>
+      </Container>
+    </Section>
+  );
+}
+
+/** Spec-sheet matrix: shared ink hairlines, every cell the same size. Reads as reference, not as marketing. */
+function FeaturesMatrix({ b, tone }: { b: FeatureBlock; tone: Tone }) {
+  const wide = b.items.length >= 8;
+  return (
+    <Section tone={tone} space="lg">
+      <Container>
+        <SectionHead label={b.label} title={b.title} intro={b.intro} />
+        <ol className={`grid gap-px border border-ink bg-ink ${wide ? "sm:grid-cols-2 lg:grid-cols-4" : "sm:grid-cols-2"}`}>
+          {b.items.map((it, i) => (
+            <li key={it.title} className="flex flex-col bg-surface p-6">
+              <span className="t-eyebrow mb-8 text-accent">{num(i)}</span>
+              <h3 className="t-h3 mb-2 text-[1.125rem]">{it.title}</h3>
+              <p className="text-[0.9375rem] text-body">{it.body}</p>
+            </li>
+          ))}
+        </ol>
+      </Container>
+    </Section>
+  );
+}
+
+/** Oversized statements: the page is a few things said plainly, at a size you cannot skim past. */
+function FeaturesStack({ b, tone }: { b: FeatureBlock; tone: Tone }) {
+  return (
+    <Section tone={tone} space="lg">
+      <Container>
+        <SectionHead label={b.label} title={b.title} intro={b.intro} />
+        <ol>
+          {b.items.map((it, i) => (
+            <li key={it.title} className="grid gap-x-12 gap-y-3 border-t border-ink py-9 md:grid-cols-[4rem_minmax(0,1.15fr)_minmax(0,1fr)]">
+              <span className="t-eyebrow text-accent md:pt-3">{num(i)}</span>
+              <h3 className="font-display text-[clamp(1.75rem,1.2rem+1.9vw,2.75rem)] leading-[1.08] tracking-[-0.015em] text-ink">{it.title}</h3>
+              <p className="text-body md:pt-2">{it.body}</p>
+            </li>
+          ))}
+        </ol>
+      </Container>
+    </Section>
+  );
+}
+
+const featureViews = { list: FeaturesList, index: FeaturesIndex, matrix: FeaturesMatrix, stack: FeaturesStack } as const;
+
+/* ---------- steps ---------- */
+
+/** Zig-zag flow along a spine: one step at a time, alternating sides on wide screens. */
+function StepsSpine({ b, tone }: { b: StepsBlock; tone: Tone }) {
+  return (
+    <Section tone={tone} space="lg">
+      <Container>
+        <SectionHead label={b.label} title={b.title} intro={b.intro} />
+        <ol className="relative mx-auto max-w-[54rem]">
+          <span aria-hidden="true" className="absolute bottom-3 left-4 top-3 w-px bg-ink md:left-1/2" />
+          {b.steps.map((s, i) => (
+            <li key={s.title} className="relative pb-12 pl-14 last:pb-0 md:grid md:grid-cols-2 md:gap-x-20 md:pl-0">
+              <span
+                aria-hidden="true"
+                className="t-num absolute left-0 top-0 grid size-8 place-items-center rounded-sm border border-ink bg-surface text-sm text-ink md:left-1/2 md:-translate-x-1/2"
+              >
+                {i + 1}
+              </span>
+              <div className={i % 2 === 0 ? "md:col-start-1 md:text-right" : "md:col-start-2"}>
+                <p className="t-h3 leading-8">{s.title}</p>
+                <p className="mt-1 text-body">{s.sub}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </Container>
+    </Section>
+  );
+}
+
+function StepsLayers({ b, tone }: { b: StepsBlock; tone: Tone }) {
+  return (
+    <Section tone={tone} space="lg">
+      <TwoCol ratio="text">
+        <SectionHead label={b.label} title={b.title} intro={b.intro} />
+        <LayersDiagram steps={b.steps} />
+      </TwoCol>
+    </Section>
+  );
+}
+
+const laneTone = ["bg-accent text-white", "bg-amber-soft text-amber", "bg-paper-2 text-subtle ring-1 ring-inset ring-line-strong"];
+
+function StepsLanes({ b, tone }: { b: StepsBlock; tone: Tone }) {
+  return (
+    <Section tone={tone} space="md">
+      <Editorial head={<SectionHead label={b.label} title={b.title} intro={b.intro} />}>
+        <ol className="border-t border-ink">
+          {b.steps.map((s, i) => (
+            <li key={s.title} className="grid items-center gap-x-8 gap-y-2 border-b border-line py-6 md:grid-cols-[9rem_minmax(0,1fr)]">
+              <span className={`t-eyebrow inline-flex w-fit rounded-sm px-3 py-1.5 text-xs ${laneTone[i] ?? laneTone[2]}`}>{s.title}</span>
+              <p className="text-lg text-ink">{s.sub}</p>
+            </li>
+          ))}
+        </ol>
+      </Editorial>
+    </Section>
+  );
+}
+
+/* ---------- block dispatch ---------- */
+
+type Ctx = { layout: Layout; feature: number; split: number };
+
+function renderBlock(b: Block, tone: Tone, key: number, ctx: Ctx) {
   switch (b.kind) {
     case "features": {
       const n = ctx.feature++;
-      const indexed = b.cols === 3 || n % 2 === 1;
-      if (!indexed) {
-        return (
-          <Section key={key} tone={tone} space="lg">
-            <Editorial head={<SectionHead label={b.label} title={b.title} intro={b.intro} />}>
-              <ol className="border-t border-line-strong">
-                {b.items.map((it, i) => (
-                  <li key={it.title} className="grid gap-x-10 gap-y-2 border-b border-line py-7 md:grid-cols-[2.5rem_minmax(0,0.9fr)_minmax(0,1.2fr)]">
-                    <span className="t-num text-sm text-accent md:pt-1.5">{String(i + 1).padStart(2, "0")}</span>
-                    <h3 className="t-h3">{it.title}</h3>
-                    <p className="text-body">{it.body}</p>
-                  </li>
-                ))}
-              </ol>
-            </Editorial>
-          </Section>
-        );
-      }
-      return (
-        <Section key={key} tone={tone}>
-          <Container>
-            <SectionHead label={b.label} title={b.title} intro={b.intro} />
-            <ol className={`grid gap-x-10 gap-y-12 ${b.cols === 3 ? "md:grid-cols-3" : "sm:grid-cols-2"}`}>
-              {b.items.map((it, i) => (
-                <li key={it.title}>
-                  <span aria-hidden="true" className="t-num block text-5xl text-ghost">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <h3 className="t-h3 mb-2 mt-4 border-t-2 border-ink pt-4">{it.title}</h3>
-                  <p className="text-body">{it.body}</p>
-                </li>
-              ))}
-            </ol>
-          </Container>
-        </Section>
-      );
+      const kind = ctx.layout.features?.[n] ?? (b.cols === 3 || n % 2 === 1 ? "index" : "list");
+      const View = featureViews[kind];
+      return <View key={key} b={b} tone={tone} />;
     }
 
     case "split": {
@@ -95,7 +212,11 @@ function renderBlock(b: Block, tone: Tone, key: number, ctx: { feature: number; 
       );
     }
 
-    case "steps":
+    case "steps": {
+      const kind: StepKind = ctx.layout.steps ?? "timeline";
+      if (kind === "spine") return <StepsSpine key={key} b={b} tone={tone} />;
+      if (kind === "layers") return <StepsLayers key={key} b={b} tone={tone} />;
+      if (kind === "lanes") return <StepsLanes key={key} b={b} tone={tone} />;
       return (
         <Section key={key} tone={tone} space="sm">
           <Container>
@@ -104,13 +225,14 @@ function renderBlock(b: Block, tone: Tone, key: number, ctx: { feature: number; 
           </Container>
         </Section>
       );
+    }
 
     case "metrics":
       return (
         <Section key={key} tone={tone} space="lg">
           <Container>
             <SectionHead label={b.label} title={b.title} intro={b.intro} />
-            <dl className="grid border-y border-line-strong sm:grid-cols-2 lg:grid-cols-4">
+            <dl className="grid border-y border-ink sm:grid-cols-2 lg:grid-cols-4">
               {b.items.map((m, i) => (
                 <div
                   key={m.label}
@@ -133,16 +255,16 @@ function renderBlock(b: Block, tone: Tone, key: number, ctx: { feature: number; 
             head={
               <div>
                 <p className="t-num text-[clamp(4rem,3rem+4vw,6.5rem)] leading-none text-ghost" aria-hidden="true">
-                  {String(b.items.length).padStart(2, "0")}
+                  {num(b.items.length - 1)}
                 </p>
                 <p className="t-eyebrow mt-3 text-accent">{b.title ?? "Questions"}</p>
               </div>
             }
           >
-            <div className="border-t border-line-strong">
+            <div className="border-t border-ink">
               {b.items.map((f) => (
                 <details key={f.q} className="group border-b border-line">
-                  <summary className="flex min-h-16 list-none items-center justify-between gap-6 py-4 font-display text-xl font-semibold leading-snug text-ink [&::-webkit-details-marker]:hidden">
+                  <summary className="flex min-h-16 list-none items-center justify-between gap-6 py-4 font-display text-xl leading-snug text-ink [&::-webkit-details-marker]:hidden">
                     {f.q}
                     <ChevronDownIcon className="size-6 shrink-0 text-subtle transition-transform duration-200 group-open:rotate-180" />
                   </summary>
@@ -211,9 +333,7 @@ function renderBlock(b: Block, tone: Tone, key: number, ctx: { feature: number; 
             <div>
               <Label>Schedule a consultation</Label>
               <H2>Tell us about your clinic</H2>
-              <Lead>
-                A few details are enough to start. We&apos;ll follow up with questions only if we need them.
-              </Lead>
+              <Lead>A few details are enough to start. We&apos;ll follow up with questions only if we need them.</Lead>
               <dl className="mt-10 divide-y divide-line border-y border-line text-base">
                 <div className="flex flex-wrap justify-between gap-x-6 py-4">
                   <dt className="font-semibold text-ink">Email</dt>
@@ -243,28 +363,122 @@ function renderBlock(b: Block, tone: Tone, key: number, ctx: { feature: number; 
   }
 }
 
+/* ---------- hero ---------- */
+
+const firstOf = <K extends Block["kind"]>(page: PageData, kind: K) => page.blocks.find((b): b is Extract<Block, { kind: K }> => b.kind === kind);
+
+/** The illustration for a page's hero, built from that page's own content. Null if the data it needs is missing. */
+function visualFor(layout: Layout, page: PageData): ReactNode {
+  const features = firstOf(page, "features");
+  const steps = firstOf(page, "steps");
+  const split = firstOf(page, "split");
+  switch (layout.visual) {
+    case "frontdesk":
+      return <FrontDeskMock />;
+    case "intake":
+      return split ? <IntakeFormDiagram rows={split.rows} /> : null;
+    case "coverage":
+      return steps ? <CoverageDiagram steps={steps.steps} /> : null;
+    case "datapath":
+      return features ? <DataPathDiagram items={features.items} /> : null;
+    case "hub":
+      return features ? <HubDiagram items={features.items} /> : null;
+    case "gantt": {
+      const timeline = page.blocks.find((b): b is Extract<Block, { kind: "split" }> => b.kind === "split" && b.rows.some(([, v]) => /week/i.test(v)));
+      return timeline ? <GanttDiagram rows={timeline.rows} /> : null;
+    }
+    case "quote":
+      return features ? <QuoteDiagram items={features.items} /> : null;
+    default:
+      return null;
+  }
+}
+
+function Notice({ text }: { text: string }) {
+  return (
+    <p role="note" className="mt-8 max-w-[62ch] border-l-2 border-amber bg-amber-soft px-4 py-3 text-sm text-ink">
+      <strong className="font-semibold">Template note: </strong>
+      {text}
+    </p>
+  );
+}
+
+function PageHero({ page, layout }: { page: PageData; layout: Layout }) {
+  const visual = layout.hero === "visual" ? visualFor(layout, page) : null;
+
+  if (visual) {
+    return (
+      <section className="overflow-x-clip border-b border-line pb-16 pt-12 md:pb-24 md:pt-20">
+        <Container className="grid items-center gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-16">
+          <div>
+            <p className="t-eyebrow mb-7 text-accent">{page.label}</p>
+            <h1 className="t-title">{page.h1}</h1>
+            <p className="t-lead mt-7 max-w-[42ch] text-body">{page.lead}</p>
+            {page.notice && <Notice text={page.notice} />}
+          </div>
+          <div className="lg:-mr-8 xl:-mr-16">{visual}</div>
+        </Container>
+      </section>
+    );
+  }
+
+  if (layout.hero === "statement") {
+    return (
+      <section className="border-b border-line pb-16 pt-12 md:pb-24 md:pt-16">
+        <Container>
+          <div className="border-t-2 border-ink pt-6">
+            <p className="t-eyebrow text-accent">{page.label}</p>
+            <h1 className="t-display mt-8 max-w-[17ch]">{page.h1}</h1>
+          </div>
+          <div className="mt-12 grid items-start gap-x-16 gap-y-6 lg:grid-cols-2">
+            <p className="t-lead max-w-[40ch] text-body">{page.lead}</p>
+            {page.notice && <Notice text={page.notice} />}
+          </div>
+        </Container>
+      </section>
+    );
+  }
+
+  if (layout.hero === "compact") {
+    return (
+      <section className="border-b border-line pb-10 pt-12 md:pb-14 md:pt-16">
+        <Container>
+          <div className="grid items-end gap-x-16 gap-y-5 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)]">
+            <div>
+              <p className="t-eyebrow mb-5 text-accent">{page.label}</p>
+              <h1 className="t-title-sm">{page.h1}</h1>
+            </div>
+            <p className="t-lead max-w-[38ch] text-body">{page.lead}</p>
+          </div>
+          {page.notice && <Notice text={page.notice} />}
+        </Container>
+      </section>
+    );
+  }
+
+  return (
+    <section className="border-b border-line pb-16 pt-14 md:pb-24 md:pt-24">
+      <Container>
+        <p className="t-eyebrow mb-7 text-accent">{page.label}</p>
+        <div className="grid items-end gap-x-16 gap-y-8 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)]">
+          <h1 className="t-title">{page.h1}</h1>
+          <p className="t-lead max-w-[36ch] text-body lg:border-l lg:border-line-strong lg:pl-8">{page.lead}</p>
+        </div>
+        {page.notice && <Notice text={page.notice} />}
+      </Container>
+    </section>
+  );
+}
+
 export default function PageView({ slug }: { slug: string }) {
   const page = pages[slug];
+  const layout = layouts[slug] ?? { hero: "split" as const };
   const closing = "closing" in page ? page.closing : defaultClosing;
-  const ctx = { feature: 0, split: 0 };
+  const ctx: Ctx = { layout, feature: 0, split: 0 };
 
   return (
     <>
-      <section className="border-b border-line pb-16 pt-14 md:pb-24 md:pt-24">
-        <Container>
-          <p className="t-eyebrow mb-7 text-accent">{page.label}</p>
-          <div className="grid items-end gap-x-16 gap-y-8 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)]">
-            <h1 className="t-title">{page.h1}</h1>
-            <p className="t-lead max-w-[36ch] text-body lg:border-l lg:border-line-strong lg:pl-8">{page.lead}</p>
-          </div>
-          {page.notice && (
-            <p role="note" className="mt-10 max-w-[62ch] border-l-2 border-amber bg-amber-soft px-4 py-3 text-sm text-ink">
-              <strong className="font-semibold">Template note: </strong>
-              {page.notice}
-            </p>
-          )}
-        </Container>
-      </section>
+      <PageHero page={page} layout={layout} />
 
       {page.blocks.map((b, i) => renderBlock(b, i % 2 === 0 ? "plain" : "tint", i, ctx))}
 
