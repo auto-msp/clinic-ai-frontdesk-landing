@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>YourBrand | AI Front Desk for Clinics</title>
+<meta name="description" content="Template: an AI front desk that answers calls, books visits, gathers intake and refills cancelled slots from a waitlist.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="site">
+  <div class="container nav">
+    <a href="#top" class="logo"><i>Y</i>YourBrand</a>
+    <ul id="menu">
+      <li><a href="#how">How it works</a></li>
+      <li><a href="#waitlist">Waitlist calling</a></li>
+      <li><a href="#receptionist">Receptionist</a></li>
+      <li><a href="#intake">Intake</a></li>
+      <li><a href="#dashboard">Dashboard</a></li>
+      <li><a href="#security">Security</a></li>
+    </ul>
+    <a href="#demo" class="btn btn-primary hide-m">Request a Demo</a>
+    <button class="burger" id="burger" aria-label="Menu">☰</button>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container grid">
+    <div>
+      <span class="eyebrow">AI front desk for clinics</span>
+      <h1>An AI front desk that books visits and refills cancelled slots</h1>
+      <p class="tag">Stop watching good appointment slots go to waste.</p>
+      <p class="lead">Your assistant picks up every call, books the visit, gathers medical and insurance details, and rings the next person on your waitlist the moment a patient cancels.</p>
+      <ul class="nolist">
+        <li>No manual call-backs</li>
+        <li>No idle appointment slots</li>
+        <li>No swamped reception desk</li>
+      </ul>
+      <div class="cta-row">
+        <a href="#demo" class="btn btn-primary">Request a Demo</a>
+        <a href="#how" class="btn btn-outline">See How It Works</a>
+      </div>
+    </div>
+    <div class="hero-visual reveal">Hero image placeholder<br>(replace with your own photo)</div>
+  </div>
+  <div class="container" id="how">
+    <p class="flow-title">How a cancelled slot gets refilled</p>
+    <div class="flow">
+      <div class="step"><b>Cancel</b><span>Patient cancels</span></div>
+      <div class="step"><b>Match</b><span>Waitlist checked</span></div>
+      <div class="step"><b>Call</b><span>AI phones patient</span></div>
+      <div class="step"><b>Accept</b><span>Patient confirms</span></div>
+      <div class="step"><b>Filled</b><span>Slot recovered</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="alt">
+  <div class="container two">
+    <div class="reveal">
+      <span class="eyebrow">The problem</span>
+      <h2>Cancellations quietly drain revenue</h2>
+      <p class="lead">The slot isn't lost because patients don't want care. It's lost because winning it back takes phone tag, voicemails and manual calendar edits.</p>
+    </div>
+    <div class="reveal">
+      <p>While staff work through the waitlist, the phones keep ringing, insurance cards need checking and forms need chasing. By the time someone says yes, the window has often closed.</p>
+      <br>
+      <p>Hiring more people doesn't fix this. A workflow built specifically for clinic front desks does.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WAITLIST CALLING -->
+<section id="waitlist" class="dark">
+  <div class="container two">
+    <div class="reveal">
+      <span class="eyebrow">Signature feature</span>
+      <h2>Automatic waitlist calling</h2>
+      <p>Typical scheduling tools store a waitlist and stop there. This one acts on it: it spots a cancellation, calls the best-fit patient, confirms the booking and updates the calendar, usually within a couple of minutes.</p>
+      <div class="callout" style="background:rgba(255,255,255,.08);color:#fff">It doesn't send staff a task. It completes the task.</div>
+      <ul class="checks">
+        <li>Detects cancellations as they happen</li>
+        <li>Ranks the waitlist by distance, urgency and fit</li>
+        <li>Places the call right away</li>
+        <li>Handles confirmation, rescheduling and intake</li>
+        <li>Writes back to your records system</li>
+      </ul>
+    </div>
+    <div class="reveal">
+      <div class="flow" style="margin-top:0">
+        <div class="step"><b>Slot opens</b></div>
+        <div class="step"><b>Best match</b></div>
+        <div class="step"><b>Auto call</b></div>
+        <div class="step"><b>Secured</b></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RECEPTIONIST -->
+<section id="receptionist">
+  <div class="container two rev">
+    <div class="media reveal">
+      <div class="phone">
+        <div class="top"><span>9:41</span><span>YourBrand AI</span></div>
+        <div class="msg">“Hi, this is YourBrand calling for Riverside Clinic. A Thursday 2 pm opening just came up. Would you like it?”</div>
+        <div class="acts"><b class="acc">Accept</b><b class="dec">Decline</b></div>
+        <div class="done">✓ Appointment confirmed<br>Thu · 2:00 PM · Intake form sent</div>
+      </div>
+    </div>
+    <div class="reveal">
+      <span class="eyebrow">Always on</span>
+      <h2>A phone receptionist that never clocks out</h2>
+      <p>Every inbound call is answered in natural language, at any hour, and appointments land straight in your calendar.</p>
+      <br>
+      <ul class="checks">
+        <li>No voicemail boxes, no hold music</li>
+        <li>New bookings and reschedules</li>
+        <li>Appointment confirmations on request</li>
+        <li>Absorbs overflow at peak times</li>
+        <li>Hands clinical questions to on-call staff</li>
+        <li>Every call logged in your dashboard</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- MEDICAL INTAKE -->
+<section id="intake" class="alt">
+  <div class="container two">
+    <div class="reveal">
+      <span class="eyebrow">Medical intake</span>
+      <h2>Intake gathered while the patient is still on the line</h2>
+      <p>Questions are tailored to the appointment type and answers are stored in structured form, so charts are ready before the visit starts rather than chased the morning of.</p>
+      <br>
+      <ul class="checks">
+        <li>Reason for visit and symptoms</li>
+        <li>Medications and allergies</li>
+        <li>Preferred provider and time</li>
+        <li>Custom questions per visit type</li>
+        <li>Delivered to your records system automatically</li>
+      </ul>
+      <br><a class="btn-link" href="#demo">Learn about medical intake →</a>
+    </div>
+    <div class="reveal">
+      <div class="card">
+        <div class="card-h"><span>PATIENT INTAKE</span><span>Sample</span></div>
+        <div class="card-b">
+          <div class="row"><span>Reason for visit</span><span>Annual checkup</span></div>
+          <div class="row"><span>Symptoms</span><span>Fatigue, mild headache</span></div>
+          <div class="row"><span>Preferred provider</span><span>Dr. Example</span></div>
+          <div class="row"><span>Preferred time</span><span>Morning</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INSURANCE -->
+<section>
+  <div class="container two rev">
+    <div class="media reveal">
+      <div class="card">
+        <div class="card-h"><span>INSURANCE DETAILS</span><span class="live">Sample</span></div>
+        <div class="card-b">
+          <div class="row"><span>Provider</span><span>Sample Health Plan</span></div>
+          <div class="row"><span>Member ID</span><span>XXX••••7823</span></div>
+          <div class="row"><span>Group</span><span>GRP-0000</span></div>
+          <div class="row"><span>Policy holder</span><span>Self</span></div>
+          <div class="row"><span>Copay</span><span>$25</span></div>
+          <div class="row"><span>Status</span><span class="ok">Verified · Active</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="reveal">
+      <span class="eyebrow">Insurance intake</span>
+      <h2>Coverage details captured and checked at booking</h2>
+      <p>Missing or stale insurance data is a top cause of billing delays. Details are collected during the call and eligibility is checked before the visit is confirmed, so billing starts clean.</p>
+      <br>
+      <ul class="checks">
+        <li>Plan and member ID collected on the call</li>
+        <li>Group, policy holder and copay captured</li>
+        <li>Real-time eligibility check</li>
+        <li>Secondary coverage when relevant</li>
+        <li>Prompts to refresh expired coverage</li>
+      </ul>
+      <br><a class="btn-link" href="#demo">Learn about insurance intake →</a>
+    </div>
+  </div>
+</section>
+
+<!-- SCHEDULING -->
+<section class="alt">
+  <div class="container two">
+    <div class="reveal">
+      <span class="eyebrow">Scheduling intelligence</span>
+      <h2>Smart scheduling that avoids double booking</h2>
+      <p>It reads your live calendar on every call and respects provider preferences, visit lengths, buffers and room availability, whether you have one clinician or a dozen.</p>
+    </div>
+    <div class="reveal card">
+      <div class="card-h"><span>SCHEDULE VIEW</span><span>Sample</span></div>
+      <div class="slots">
+        <div class="slot booked">9:00 · Patient A</div>
+        <div class="slot booked">9:30 · Patient B</div>
+        <div class="slot filled">10:00 · Patient C ✓</div>
+        <div class="slot open">10:30 · Open</div>
+        <div class="slot booked">11:00 · Patient D</div>
+        <div class="slot filled">2:00 · Patient E ✓</div>
+        <div class="slot booked">2:30 · Patient F</div>
+        <div class="slot open">3:00 · Open</div>
+      </div>
+      <div class="legend"><span>▢ Booked</span><span style="color:#12805a">▣ Auto-filled</span><span style="color:var(--accent)">┄ Open</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- NO-SHOW -->
+<section>
+  <div class="container two rev">
+    <div class="media reveal">
+      <p class="flow-title" style="margin-top:0">No-show recovery sequence</p>
+      <div class="flow" style="margin-top:12px">
+        <div class="step"><b>Reminder</b><span>48 hrs before</span></div>
+        <div class="step"><b>Confirm</b><span>Patient replies</span></div>
+        <div class="step"><b>Release</b><span>Waitlist triggered</span></div>
+        <div class="step"><b>Recover</b><span>New patient booked</span></div>
+      </div>
+    </div>
+    <div class="reveal">
+      <span class="eyebrow">No-show prevention</span>
+      <h2>Fewer empty chairs, less lost revenue</h2>
+      <p>A staged reminder flow confirms attendance, makes cancelling easy, and instantly refills a slot if someone drops out.</p>
+      <br>
+      <ul class="checks">
+        <li>Reminder two days before</li>
+        <li>Confirmation request the day before</li>
+        <li>Extra same-day nudge for higher-risk patients</li>
+        <li>One-touch cancel that triggers the waitlist</li>
+        <li>Revenue impact reporting</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- DASHBOARD -->
+<section id="dashboard" class="alt">
+  <div class="container two">
+    <div class="reveal">
+      <span class="eyebrow">Command center</span>
+      <h2>One dashboard for everything the assistant does</h2>
+      <p>Every action is visible and auditable in a single view.</p>
+      <br>
+      <ul class="checks">
+        <li>Live schedule with slot status</li>
+        <li>Waitlist queue and call log</li>
+        <li>Intake completion rates</li>
+        <li>Insurance verification status</li>
+        <li>No-show trends and revenue recovered</li>
+        <li>Call recordings and transcripts</li>
+      </ul>
+    </div>
+    <div class="reveal card">
+      <div class="card-h"><span>DASHBOARD</span><span class="live">● Live</span></div>
+      <div class="stats">
+        <div class="stat"><b data-n="12">0</b><span>Slots filled</span></div>
+        <div class="stat"><b data-n="28">0</b><span>Calls made</span></div>
+        <div class="stat"><b data-n="94" data-s="%">0</b><span>Intake done</span></div>
+        <div class="stat"><b data-n="1">0</b><span>No-shows</span></div>
+      </div>
+      <div class="act"><span>Waitlist call: patient accepted Thu 2 pm</span><span class="badge">Confirmed</span></div>
+      <div class="act"><span>Insurance verified: active coverage</span><span class="badge">Verified</span></div>
+      <div class="act"><span>Intake completed before visit</span><span class="badge">Complete</span></div>
+      <div class="act"><span>Reminder sent for Fri 10 am</span><span class="badge">Sent</span></div>
+      <div class="act"><span>No-show slot refilled automatically</span><span class="badge">Filled</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- SECURITY -->
+<section id="security" class="dark">
+  <div class="container two">
+    <div class="reveal">
+      <span class="eyebrow">Healthcare security</span>
+      <h2>Designed for regulated environments</h2>
+      <p>Replace this block with your real compliance posture. Only claim certifications you actually hold.</p>
+      <br>
+      <ul class="checks">
+        <li>Encryption in transit and at rest</li>
+        <li>Role-based access controls</li>
+        <li>Audit logs for system actions</li>
+        <li>Data minimization</li>
+      </ul>
+    </div>
+    <div class="reveal">
+      <div class="badges">
+        <span>Secure cloud</span><span>Encrypted</span><span>Role-based access</span><span>Audit logging</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AUDIENCE -->
+<section>
+  <div class="container">
+    <span class="eyebrow">Who it's for</span>
+    <h2>Built for practices of every size</h2>
+    <div class="cards">
+      <div class="c reveal"><h3>Small clinics</h3><p>Solo providers and small groups who want automation without enterprise overhead.</p></div>
+      <div class="c reveal"><h3>Multi-provider practices</h3><p>Teams juggling several clinicians, rooms and visit types.</p></div>
+      <div class="c reveal"><h3>Growing groups</h3><p>Organizations adding locations who need consistent front-desk operations.</p></div>
+      <div class="c reveal"><h3>Cancellation-heavy clinics</h3><p>Anyone losing revenue to unfilled slots and manual waitlist calls.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- IMPACT -->
+<section class="alt">
+  <div class="container">
+    <span class="eyebrow">The impact</span>
+    <h2>What changes once the front desk is automated</h2>
+    <ul class="impact">
+      <li class="reveal"><b>01</b><span>Cancelled slots refilled in minutes, not hours</span></li>
+      <li class="reveal"><b>02</b><span>Less staff time on outbound calls and hold queues</span></li>
+      <li class="reveal"><b>03</b><span>Patients arrive with intake already complete</span></li>
+      <li class="reveal"><b>04</b><span>Billing sees verified insurance before check-in</span></li>
+      <li class="reveal"><b>05</b><span>No-show rate falls with automatic reminders</span></li>
+      <li class="reveal"><b>06</b><span>More revenue captured from fewer open slots</span></li>
+      <li class="reveal"><b>07</b><span>Higher call volume without extra headcount</span></li>
+      <li class="reveal"><b>08</b><span>Staff focus on in-person patient care</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- DEMO -->
+<section id="demo" class="demo">
+  <div class="container">
+    <h2>See it in action</h2>
+    <p class="lead">Book a live walkthrough: watch a call get answered, a waitlist slot refilled and intake collected in real time.</p>
+    <a href="#" class="btn btn-primary" id="demoBtn">Request Your Demo</a>
+    <h3 id="waitlistForm" style="margin-top:56px">Or join the early-access waitlist</h3>
+    <form class="wait" id="wl">
+      <input type="email" required placeholder="you@clinic.com" aria-label="Email">
+      <button class="btn btn-outline" type="submit">Join the Waitlist</button>
+    </form>
+    <div class="thanks" id="thanks" role="status"></div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site">
+  <div class="container">
+    <span>© <span id="yr"></span> YourBrand. Template, not an official site.</span>
+    <span>Privacy · Terms · Contact</span>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>
