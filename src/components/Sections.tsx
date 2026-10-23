@@ -1,4 +1,5 @@
-import { CheckIcon } from "./icons";
+import Link from "next/link";
+import { ArrowRightIcon, CheckIcon } from "./icons";
 import WaitlistForm from "./WaitlistForm";
 import {
   Body,
@@ -8,10 +9,8 @@ import {
   H2,
   Label,
   Lead,
-  Row,
   Section,
   Steps,
-  TextLink,
   TwoCol,
   Window,
 } from "./ui";
@@ -47,7 +46,7 @@ export function WaitlistCalling() {
     <Section id="waitlist" tone="ink">
       <TwoCol>
         <div className="rise">
-          <Label n="02" dark>
+          <Label dark>
             Signature feature
           </Label>
           <H2 dark>Automatic waitlist calling</H2>
@@ -95,9 +94,9 @@ const transcript = [
   ["Patient", "Yes please."],
 ] as const;
 
-export function Receptionist() {
+export function Receptionist({ tone = "plain" }: { tone?: "plain" | "tint" }) {
   return (
-    <Section id="receptionist">
+    <Section tone={tone}>
       <TwoCol flip>
         <div className="rise">
           <Window title="Inbound call · 7:48 PM" tag="Sample transcript">
@@ -125,7 +124,7 @@ export function Receptionist() {
           </Window>
         </div>
         <div className="rise">
-          <Label n="03">Always on</Label>
+          <Label>Always on</Label>
           <H2>A phone receptionist that never clocks out</H2>
           <Lead>
             Every inbound call is answered in natural language, at any hour, and appointments land straight in
@@ -147,85 +146,6 @@ export function Receptionist() {
   );
 }
 
-export function MedicalIntake() {
-  return (
-    <Section id="intake" tone="tint">
-      <TwoCol>
-        <div className="rise">
-          <Label n="04">Medical intake</Label>
-          <H2>Intake gathered while the patient is still on the line</H2>
-          <Lead>
-            Questions are tailored to the appointment type and answers are stored in structured form, so charts
-            are ready before the visit starts rather than chased the morning of.
-          </Lead>
-          <Checks
-            items={[
-              "Reason for visit and symptoms",
-              "Medications and allergies",
-              "Preferred provider and time",
-              "Custom questions per visit type",
-              "Delivered to your records system automatically",
-            ]}
-          />
-          <TextLink href="/solutions/medical-intake">Learn about medical intake</TextLink>
-        </div>
-        <Window title="Patient intake" className="rise">
-          <dl className="px-5 py-2">
-            <Row k="Reason for visit" v="Annual checkup" />
-            <Row k="Symptoms" v="Fatigue, mild headache" />
-            <Row k="Preferred provider" v="Dr. Example" />
-            <Row k="Preferred time" v="Morning" />
-          </dl>
-        </Window>
-      </TwoCol>
-    </Section>
-  );
-}
-
-export function InsuranceIntake() {
-  return (
-    <Section>
-      <TwoCol flip>
-        <Window title="Insurance details" className="rise">
-          <dl className="px-5 py-2">
-            <Row k="Provider" v="Sample Health Plan" />
-            <Row k="Member ID" v={<span className="tnum">XXX••••7823</span>} />
-            <Row k="Group" v={<span className="tnum">GRP-0000</span>} />
-            <Row k="Policy holder" v="Self" />
-            <Row k="Copay" v={<span className="tnum">$25</span>} />
-            <Row
-              k="Status"
-              v={
-                <Chip tone="ok" check>
-                  Verified · Active
-                </Chip>
-              }
-            />
-          </dl>
-        </Window>
-        <div className="rise">
-          <Label n="05">Insurance intake</Label>
-          <H2>Coverage details captured and checked at booking</H2>
-          <Lead>
-            Missing or stale insurance data is a top cause of billing delays. Details are collected during the
-            call and eligibility is checked before the visit is confirmed, so billing starts clean.
-          </Lead>
-          <Checks
-            items={[
-              "Plan and member ID collected on the call",
-              "Group, policy holder and copay captured",
-              "Real-time eligibility check",
-              "Secondary coverage when relevant",
-              "Prompts to refresh expired coverage",
-            ]}
-          />
-          <TextLink href="/solutions/insurance-intake">Learn about insurance intake</TextLink>
-        </div>
-      </TwoCol>
-    </Section>
-  );
-}
-
 type Slot = { time: string; who: string; kind: "booked" | "filled" | "open" };
 const slots: Slot[] = [
   { time: "9:00", who: "Patient A", kind: "booked" },
@@ -238,12 +158,12 @@ const slots: Slot[] = [
   { time: "3:00", who: "Open", kind: "open" },
 ];
 
-export function Scheduling() {
+export function Scheduling({ tone = "tint" }: { tone?: "plain" | "tint" }) {
   return (
-    <Section tone="tint">
+    <Section tone={tone}>
       <TwoCol>
         <div className="rise">
-          <Label n="06">Scheduling intelligence</Label>
+          <Label>Scheduling intelligence</Label>
           <H2>Smart scheduling that avoids double booking</H2>
           <Lead>
             It reads your live calendar on every call and respects provider preferences, visit lengths, buffers
@@ -275,9 +195,9 @@ export function Scheduling() {
   );
 }
 
-export function NoShow() {
+export function NoShow({ tone = "plain" }: { tone?: "plain" | "tint" }) {
   return (
-    <Section>
+    <Section tone={tone}>
       <TwoCol flip>
         <div className="rise">
           <Steps
@@ -292,7 +212,7 @@ export function NoShow() {
           />
         </div>
         <div className="rise">
-          <Label n="07">No-show prevention</Label>
+          <Label>No-show prevention</Label>
           <H2>Fewer empty chairs, less lost revenue</H2>
           <Lead>
             A staged reminder flow confirms attendance, makes cancelling easy, and instantly refills a slot if
@@ -328,12 +248,12 @@ const activity = [
   ["No-show slot refilled automatically", "Filled"],
 ] as const;
 
-export function Dashboard() {
+export function Dashboard({ tone = "tint" }: { tone?: "plain" | "tint" }) {
   return (
-    <Section id="dashboard" tone="tint">
+    <Section tone={tone}>
       <TwoCol>
         <div className="rise">
-          <Label n="08">Command center</Label>
+          <Label>Command center</Label>
           <H2>One dashboard for everything the assistant does</H2>
           <Lead>Every action is visible and auditable in a single view.</Lead>
           <Checks
@@ -376,37 +296,37 @@ export function Dashboard() {
   );
 }
 
-const safeguards = [
-  ["Encryption", "In transit and at rest"],
-  ["Access", "Role-based controls"],
-  ["Audit", "Logs for system actions"],
-  ["Data", "Minimization by default"],
+const explore = [
+  ["/product", "Product", "Everything the assistant does, from the phones to the dashboard."],
+  ["/solutions/waitlist-automation", "Waitlist automation", "How cancelled slots get refilled by phone, usually in minutes."],
+  ["/solutions/medical-intake", "Medical intake", "Clinical details gathered on the call, ready before the visit."],
+  ["/solutions/insurance-intake", "Insurance intake", "Coverage captured and checked before the booking is confirmed."],
+  ["/security", "Security", "How patient information is protected."],
+  ["/case-studies", "Case studies", "What recovering revenue from cancellations looks like."],
 ] as const;
 
-export function Security() {
+export function Explore() {
   return (
-    <Section id="security" tone="ink">
-      <TwoCol>
+    <Section tone="tint">
+      <Container>
         <div className="rise">
-          <Label n="09" dark>
-            Healthcare security
-          </Label>
-          <H2 dark>Designed for regulated environments</H2>
-          <Lead dark>
-            Template copy: replace this block with your real compliance posture. Only claim certifications you
-            actually hold.
-          </Lead>
-          <TextLink href="/security">Read about security</TextLink>
+          <Label n="02">Explore</Label>
+          <H2>Everything the front desk does, one page each</H2>
         </div>
-        <dl className="rise grid gap-x-8 sm:grid-cols-2">
-          {safeguards.map(([k, v]) => (
-            <div key={k} className="border-t border-white/20 py-5">
-              <dt className="font-display text-lg font-semibold text-white">{k}</dt>
-              <dd className="text-white/75">{v}</dd>
-            </div>
+        <ul className="mt-12 grid gap-x-10 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
+          {explore.map(([href, title, body]) => (
+            <li key={href} className="rise border-t-2 border-line-strong">
+              <Link href={href} className="group block py-5">
+                <h3 className="mb-2 flex items-center gap-2 text-lg font-semibold group-hover:text-accent">
+                  {title}
+                  <ArrowRightIcon className="size-4 transition-transform group-hover:translate-x-1" />
+                </h3>
+                <p className="text-[0.95rem] text-body">{body}</p>
+              </Link>
+            </li>
           ))}
-        </dl>
-      </TwoCol>
+        </ul>
+      </Container>
     </Section>
   );
 }
@@ -423,7 +343,7 @@ export function Audience() {
     <Section>
       <Container>
         <div className="rise">
-          <Label n="10">Who it&apos;s for</Label>
+          <Label n="03">Who it&apos;s for</Label>
           <H2>Built for practices of every size</H2>
         </div>
         <ul className="mt-12 grid gap-x-8 gap-y-8 sm:grid-cols-2 lg:grid-cols-4">
@@ -455,7 +375,7 @@ export function Impact() {
     <Section tone="tint">
       <Container>
         <div className="rise">
-          <Label n="11">The impact</Label>
+          <Label n="04">The impact</Label>
           <H2>What changes once the front desk is automated</H2>
         </div>
         <ol className="mt-10 grid gap-x-12 md:grid-cols-2">
@@ -478,7 +398,7 @@ export function Demo() {
     <Section id="demo">
       <TwoCol>
         <div className="rise">
-          <Label n="12">Get started</Label>
+          <Label n="05">Get started</Label>
           <H2>See it in action</H2>
           <Lead>
             Book a live walkthrough: watch a call get answered, a waitlist slot refilled and intake collected
