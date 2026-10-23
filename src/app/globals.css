@@ -147,6 +147,15 @@ label[for] {
   html {
     scroll-behavior: auto;
   }
+
+  /* No decorative motion at all: hover, chevron and press transitions resolve instantly. */
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 /* Motion, kept to two purposeful moments: section content easing in as it
