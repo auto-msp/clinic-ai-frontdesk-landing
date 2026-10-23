@@ -1,61 +1,53 @@
 import Link from "next/link";
-import { ArrowRightIcon, CheckIcon } from "./icons";
+import { ArrowRightIcon } from "./icons";
+import { CallMock, DashboardMock, ScheduleMock } from "./Mockups";
 import WaitlistForm from "./WaitlistForm";
-import {
-  Body,
-  Checks,
-  Chip,
-  Container,
-  H2,
-  Label,
-  Lead,
-  Section,
-  Steps,
-  TwoCol,
-  Window,
-} from "./ui";
+import { Body, Checks, Container, Editorial, H2, Label, Lead, LinkRows, Section, Steps, TwoCol } from "./ui";
 
 export function Problem() {
   return (
-    <Section>
-      <TwoCol>
+    <Section space="lg">
+      <Editorial
+        head={
+          <div className="rise">
+            <Label n="01">The problem</Label>
+            <H2>Cancellations quietly drain revenue</H2>
+          </div>
+        }
+      >
         <div className="rise">
-          <Label n="01">The problem</Label>
-          <H2>Cancellations quietly drain revenue</H2>
-        </div>
-        <div className="rise space-y-5">
-          <Lead>
+          <p className="font-display text-[clamp(1.4rem,1.1rem+1.2vw,2rem)] font-medium leading-[1.3] tracking-tight text-ink">
             The slot isn&apos;t lost because patients don&apos;t want care. It&apos;s lost because winning it back
             takes phone tag, voicemails and manual calendar edits.
-          </Lead>
-          <Body>
-            While staff work through the waitlist, the phones keep ringing, insurance cards need checking and
-            forms need chasing. By the time someone says yes, the window has often closed.
-          </Body>
-          <Body>
-            Hiring more people doesn&apos;t fix this. A workflow built specifically for clinic front desks does.
-          </Body>
+          </p>
+          <div className="mt-10 grid gap-8 border-t border-line pt-8 md:grid-cols-2 md:gap-12">
+            <Body>
+              While staff work through the waitlist, the phones keep ringing, insurance cards need checking and
+              forms need chasing. By the time someone says yes, the window has often closed.
+            </Body>
+            <Body>
+              Hiring more people doesn&apos;t fix this. A workflow built specifically for clinic front desks does.
+            </Body>
+          </div>
         </div>
-      </TwoCol>
+      </Editorial>
     </Section>
   );
 }
 
 export function WaitlistCalling() {
   return (
-    <Section id="waitlist" tone="ink">
-      <TwoCol>
+    <Section id="waitlist" tone="ink" space="lg">
+      <TwoCol ratio="text">
         <div className="rise">
-          <Label dark>
-            Signature feature
-          </Label>
+          <Label dark>Signature feature</Label>
           <H2 dark>Automatic waitlist calling</H2>
           <Lead dark>
             Typical scheduling tools store a waitlist and stop there. This one acts on it: it spots a
             cancellation, calls the best-fit patient, confirms the booking and updates the calendar, usually
             within a couple of minutes.
           </Lead>
-          <p className="mt-7 border-l-2 border-accent-bright pl-5 font-display text-xl font-semibold text-white">
+          <p className="mt-8 border-l-2 border-accent-bright pl-5 font-display text-2xl font-semibold leading-snug text-white">
             It doesn&apos;t send staff a task. It completes the task.
           </p>
           <Checks
@@ -69,7 +61,7 @@ export function WaitlistCalling() {
             ]}
           />
         </div>
-        <div className="rise md:pl-10">
+        <div className="rise lg:pl-10">
           <Steps
             dark
             layout="column"
@@ -87,42 +79,11 @@ export function WaitlistCalling() {
   );
 }
 
-const transcript = [
-  ["Assistant", "Riverside Clinic, how can I help?"],
-  ["Patient", "I need to see someone about a recurring headache, ideally Friday morning."],
-  ["Assistant", "Dr. Example has 9:30 on Friday. Shall I book it?"],
-  ["Patient", "Yes please."],
-] as const;
-
 export function Receptionist({ tone = "plain" }: { tone?: "plain" | "tint" }) {
   return (
     <Section tone={tone}>
-      <TwoCol flip>
-        <div className="rise">
-          <Window title="Inbound call · 7:48 PM" tag="Sample transcript">
-            <ul className="px-5">
-              {transcript.map(([who, text]) => (
-                <li
-                  key={text}
-                  className="grid grid-cols-[5.5rem_1fr] gap-4 border-b border-line py-3.5 text-[0.95rem] last:border-0"
-                >
-                  <span
-                    className={`text-sm font-semibold ${who === "Assistant" ? "text-accent" : "text-subtle"}`}
-                  >
-                    {who}
-                  </span>
-                  <span className="text-ink">{text}</span>
-                </li>
-              ))}
-            </ul>
-            <p className="flex items-start gap-3 border-t border-line bg-ok-soft px-5 py-4 text-[0.95rem] font-medium text-ok">
-              <CheckIcon className="mt-0.5 size-5 shrink-0" strokeWidth={2.25} />
-              <span>
-                Booked: Fri 9:30 AM with Dr. Example. Confirmation text and intake link sent.
-              </span>
-            </p>
-          </Window>
-        </div>
+      <TwoCol flip ratio="visual">
+        <CallMock className="rise" />
         <div className="rise">
           <Label>Always on</Label>
           <H2>A phone receptionist that never clocks out</H2>
@@ -146,22 +107,10 @@ export function Receptionist({ tone = "plain" }: { tone?: "plain" | "tint" }) {
   );
 }
 
-type Slot = { time: string; who: string; kind: "booked" | "filled" | "open" };
-const slots: Slot[] = [
-  { time: "9:00", who: "Patient A", kind: "booked" },
-  { time: "9:30", who: "Patient B", kind: "booked" },
-  { time: "10:00", who: "Patient C", kind: "filled" },
-  { time: "10:30", who: "Open", kind: "open" },
-  { time: "11:00", who: "Patient D", kind: "booked" },
-  { time: "2:00", who: "Patient E", kind: "filled" },
-  { time: "2:30", who: "Patient F", kind: "booked" },
-  { time: "3:00", who: "Open", kind: "open" },
-];
-
 export function Scheduling({ tone = "tint" }: { tone?: "plain" | "tint" }) {
   return (
     <Section tone={tone}>
-      <TwoCol>
+      <TwoCol ratio="text">
         <div className="rise">
           <Label>Scheduling intelligence</Label>
           <H2>Smart scheduling that avoids double booking</H2>
@@ -170,26 +119,7 @@ export function Scheduling({ tone = "tint" }: { tone?: "plain" | "tint" }) {
             and room availability, whether you have one clinician or a dozen.
           </Lead>
         </div>
-        <Window title="Schedule view" className="rise">
-          <ul>
-            {slots.map((s) => (
-              <li
-                key={s.time}
-                className="flex items-center gap-4 border-b border-line px-5 py-3 text-[0.95rem] last:border-0"
-              >
-                <span className="tnum w-12 shrink-0 text-subtle">{s.time}</span>
-                <span className={`flex-1 ${s.kind === "open" ? "text-subtle" : "text-ink"}`}>{s.who}</span>
-                {s.kind === "booked" && <Chip>Booked</Chip>}
-                {s.kind === "filled" && (
-                  <Chip tone="ok" check>
-                    Auto-filled
-                  </Chip>
-                )}
-                {s.kind === "open" && <Chip tone="amber">Open</Chip>}
-              </li>
-            ))}
-          </ul>
-        </Window>
+        <ScheduleMock className="rise" />
       </TwoCol>
     </Section>
   );
@@ -233,25 +163,11 @@ export function NoShow({ tone = "plain" }: { tone?: "plain" | "tint" }) {
   );
 }
 
-const stats = [
-  ["12", "Slots filled"],
-  ["28", "Calls made"],
-  ["94%", "Intake done"],
-  ["1", "No-shows"],
-] as const;
-
-const activity = [
-  ["Waitlist call: patient accepted Thu 2 pm", "Confirmed"],
-  ["Insurance verified: active coverage", "Verified"],
-  ["Intake completed before visit", "Complete"],
-  ["Reminder sent for Fri 10 am", "Sent"],
-  ["No-show slot refilled automatically", "Filled"],
-] as const;
-
 export function Dashboard({ tone = "tint" }: { tone?: "plain" | "tint" }) {
   return (
     <Section tone={tone}>
-      <TwoCol>
+      <TwoCol ratio="visual" flip>
+        <DashboardMock className="rise" />
         <div className="rise">
           <Label>Command center</Label>
           <H2>One dashboard for everything the assistant does</H2>
@@ -267,66 +183,93 @@ export function Dashboard({ tone = "tint" }: { tone?: "plain" | "tint" }) {
             ]}
           />
         </div>
-        <Window title="Today" tag="Sample data" className="rise">
-          <dl className="grid grid-cols-2 border-b border-line sm:grid-cols-4">
-            {stats.map(([v, k], i) => (
-              <div
-                key={k}
-                className={`px-5 py-5 ${i % 2 === 1 ? "border-l border-line" : ""} ${i > 0 ? "sm:border-l sm:border-line" : ""} ${i >= 2 ? "border-t border-line sm:border-t-0" : ""}`}
-              >
-                <dd className="tnum font-display text-3xl font-semibold text-ink">{v}</dd>
-                <dt className="text-sm text-subtle">{k}</dt>
-              </div>
-            ))}
-          </dl>
-          <ul>
-            {activity.map(([text, status]) => (
-              <li
-                key={text}
-                className="flex items-center justify-between gap-4 border-b border-line px-5 py-3 text-[0.95rem] last:border-0"
-              >
-                <span className="text-ink">{text}</span>
-                <Chip tone="ok">{status}</Chip>
-              </li>
-            ))}
-          </ul>
-        </Window>
       </TwoCol>
     </Section>
   );
 }
 
+/** Home: the product, shown. Three drawn screens, each paired with copy that already lives in the page components. */
+export function Tour() {
+  const rows = [
+    {
+      label: "Always on",
+      title: "A phone receptionist that never clocks out",
+      body: "Every inbound call is answered in natural language, at any hour, and appointments land straight in your calendar.",
+      href: "/product",
+      cta: "See the product",
+      visual: <CallMock />,
+    },
+    {
+      label: "Scheduling intelligence",
+      title: "Smart scheduling that avoids double booking",
+      body: "It reads your live calendar on every call and respects provider preferences, visit lengths, buffers and room availability.",
+      href: "/solutions/waitlist-automation",
+      cta: "How waitlist calling works",
+      visual: <ScheduleMock />,
+    },
+    {
+      label: "Command center",
+      title: "One dashboard for everything the assistant does",
+      body: "Every action is visible and auditable in a single view.",
+      href: "/case-studies",
+      cta: "See case studies",
+      visual: <DashboardMock />,
+    },
+  ];
+  const grids = [
+    "lg:grid-cols-[minmax(0,4fr)_minmax(0,7fr)]",
+    "lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)]",
+    "lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)]",
+  ];
+  return (
+    <Section tone="tint" space="lg">
+      <Container className="space-y-24 lg:space-y-32">
+        {rows.map((r, i) => (
+          <div key={r.title} className={`rise grid items-center gap-10 lg:gap-16 ${grids[i]}`}>
+            <div className={i === 1 ? "lg:order-2" : ""}>
+              <Label>{r.label}</Label>
+              <h2 className="t-h2 mb-5 max-w-[18ch]">{r.title}</h2>
+              <p className="t-lead max-w-[40ch] text-body">{r.body}</p>
+              <Link
+                href={r.href}
+                className="mt-6 inline-flex min-h-11 items-center gap-2 font-semibold text-accent underline decoration-accent/30 underline-offset-4 hover:text-accent-hover hover:decoration-current"
+              >
+                {r.cta}
+                <ArrowRightIcon className="size-4" />
+              </Link>
+            </div>
+            <div className={i === 1 ? "lg:order-1" : ""}>{r.visual}</div>
+          </div>
+        ))}
+      </Container>
+    </Section>
+  );
+}
+
 const explore = [
-  ["/product", "Product", "Everything the assistant does, from the phones to the dashboard."],
-  ["/solutions/waitlist-automation", "Waitlist automation", "How cancelled slots get refilled by phone, usually in minutes."],
-  ["/solutions/medical-intake", "Medical intake", "Clinical details gathered on the call, ready before the visit."],
-  ["/solutions/insurance-intake", "Insurance intake", "Coverage captured and checked before the booking is confirmed."],
-  ["/security", "Security", "How patient information is protected."],
-  ["/case-studies", "Case studies", "What recovering revenue from cancellations looks like."],
-] as const;
+  { href: "/product", title: "Product", body: "Everything the assistant does, from the phones to the dashboard." },
+  { href: "/solutions/waitlist-automation", title: "Waitlist automation", body: "How cancelled slots get refilled by phone, usually in minutes." },
+  { href: "/solutions/medical-intake", title: "Medical intake", body: "Clinical details gathered on the call, ready before the visit." },
+  { href: "/solutions/insurance-intake", title: "Insurance intake", body: "Coverage captured and checked before the booking is confirmed." },
+  { href: "/security", title: "Security", body: "How patient information is protected." },
+  { href: "/case-studies", title: "Case studies", body: "What recovering revenue from cancellations looks like." },
+];
 
 export function Explore() {
   return (
-    <Section tone="tint">
-      <Container>
+    <Section space="lg">
+      <Editorial
+        head={
+          <div className="rise">
+            <Label n="02">Explore</Label>
+            <H2>Everything the front desk does, one page each</H2>
+          </div>
+        }
+      >
         <div className="rise">
-          <Label n="02">Explore</Label>
-          <H2>Everything the front desk does, one page each</H2>
+          <LinkRows items={explore} />
         </div>
-        <ul className="mt-12 grid gap-x-10 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
-          {explore.map(([href, title, body]) => (
-            <li key={href} className="rise border-t-2 border-line-strong">
-              <Link href={href} className="group block py-5">
-                <h3 className="mb-2 flex items-center gap-2 text-lg font-semibold group-hover:text-accent">
-                  {title}
-                  <ArrowRightIcon className="size-4 transition-transform group-hover:translate-x-1" />
-                </h3>
-                <p className="text-[0.95rem] text-body">{body}</p>
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </Container>
+      </Editorial>
     </Section>
   );
 }
@@ -340,20 +283,23 @@ const audience = [
 
 export function Audience() {
   return (
-    <Section>
+    <Section tone="tint">
       <Container>
-        <div className="rise">
+        <div className="rise max-w-[40rem]">
           <Label n="03">Who it&apos;s for</Label>
           <H2>Built for practices of every size</H2>
         </div>
-        <ul className="mt-12 grid gap-x-8 gap-y-8 sm:grid-cols-2 lg:grid-cols-4">
-          {audience.map(([t, d]) => (
-            <li key={t} className="rise border-t-2 border-line-strong pt-5">
-              <h3 className="mb-2 text-lg font-semibold">{t}</h3>
-              <p className="text-[0.95rem] text-body">{d}</p>
+        <ol className="mt-14 grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+          {audience.map(([t, d], i) => (
+            <li key={t} className={`rise ${i % 2 === 1 ? "lg:mt-14" : ""}`}>
+              <span className="t-num block text-5xl text-ghost" aria-hidden="true">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <h3 className="t-h3 mb-2 mt-4 border-t-2 border-ink pt-4">{t}</h3>
+              <p className="text-base text-body">{d}</p>
             </li>
           ))}
-        </ul>
+        </ol>
       </Container>
     </Section>
   );
@@ -371,20 +317,32 @@ const impact = [
 ];
 
 export function Impact() {
+  const lead = impact.slice(0, 2);
+  const rest = impact.slice(2);
   return (
-    <Section tone="tint">
+    <Section tone="ink" space="lg">
       <Container>
         <div className="rise">
-          <Label n="04">The impact</Label>
-          <H2>What changes once the front desk is automated</H2>
+          <Label dark n="04">
+            The impact
+          </Label>
+          <H2 dark>What changes once the front desk is automated</H2>
         </div>
-        <ol className="mt-10 grid gap-x-12 md:grid-cols-2">
-          {impact.map((t, i) => (
-            <li key={t} className="flex items-baseline gap-5 border-b border-line py-4">
-              <span className="tnum w-7 shrink-0 text-sm font-semibold text-accent">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <span className="text-ink">{t}</span>
+        <ol className="mt-14 grid gap-x-14 gap-y-8 md:grid-cols-2">
+          {lead.map((t, i) => (
+            <li key={t} className="rise border-t border-white/30 pt-5">
+              <span className="t-num text-sm text-accent-bright">{String(i + 1).padStart(2, "0")}</span>
+              <p className="mt-2 font-display text-[clamp(1.5rem,1.1rem+1.6vw,2.25rem)] font-semibold leading-[1.15] tracking-tight text-white">
+                {t}
+              </p>
+            </li>
+          ))}
+        </ol>
+        <ol className="mt-12 grid gap-x-14 md:grid-cols-2">
+          {rest.map((t, i) => (
+            <li key={t} className="rise flex items-baseline gap-5 border-t border-white/20 py-4">
+              <span className="t-num w-7 shrink-0 text-sm text-accent-bright">{String(i + 3).padStart(2, "0")}</span>
+              <span className="text-white/90">{t}</span>
             </li>
           ))}
         </ol>
@@ -395,8 +353,8 @@ export function Impact() {
 
 export function Demo() {
   return (
-    <Section id="demo">
-      <TwoCol>
+    <Section id="demo" space="lg">
+      <TwoCol ratio="text">
         <div className="rise">
           <Label n="05">Get started</Label>
           <H2>See it in action</H2>
@@ -406,7 +364,7 @@ export function Demo() {
           </Lead>
         </div>
         <div className="rise rounded-xl border border-line bg-surface p-6 shadow-window sm:p-8">
-          <h3 className="font-display text-xl font-semibold">Request a demo or join the waitlist</h3>
+          <h3 className="t-h3">Request a demo or join the waitlist</h3>
           <WaitlistForm />
         </div>
       </TwoCol>
