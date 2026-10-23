@@ -79,3 +79,8 @@ export const UsersIcon = (p: P) => (
     <path d="M17 14.5c2.4.2 4.2 1.8 4.7 4.5" />
   </Icon>
 );
+export const ChevronDownIcon = (p: P) => (
+  <Icon {...p}>
+    <path d="m6 9 6 6 6-6" />
+  </Icon>
+);
