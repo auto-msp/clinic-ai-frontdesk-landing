@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ArrowRightIcon } from "./icons";
 import { CallMock, DashboardMock, ScheduleMock } from "./Mockups";
 import WaitlistForm from "./WaitlistForm";
-import { Body, Checks, Container, Editorial, H2, Label, Lead, Section, Steps, TwoCol } from "./ui";
+import { Body, Checks, Container, Editorial, H2, Label, Lead, LinkRows, Section, Steps, TwoCol } from "./ui";
 
 export function Problem() {
   return (
@@ -247,13 +247,13 @@ export function Tour() {
 }
 
 const explore = [
-  ["/product", "Product", "Everything the assistant does, from the phones to the dashboard."],
-  ["/solutions/waitlist-automation", "Waitlist automation", "How cancelled slots get refilled by phone, usually in minutes."],
-  ["/solutions/medical-intake", "Medical intake", "Clinical details gathered on the call, ready before the visit."],
-  ["/solutions/insurance-intake", "Insurance intake", "Coverage captured and checked before the booking is confirmed."],
-  ["/security", "Security", "How patient information is protected."],
-  ["/case-studies", "Case studies", "What recovering revenue from cancellations looks like."],
-] as const;
+  { href: "/product", title: "Product", body: "Everything the assistant does, from the phones to the dashboard." },
+  { href: "/solutions/waitlist-automation", title: "Waitlist automation", body: "How cancelled slots get refilled by phone, usually in minutes." },
+  { href: "/solutions/medical-intake", title: "Medical intake", body: "Clinical details gathered on the call, ready before the visit." },
+  { href: "/solutions/insurance-intake", title: "Insurance intake", body: "Coverage captured and checked before the booking is confirmed." },
+  { href: "/security", title: "Security", body: "How patient information is protected." },
+  { href: "/case-studies", title: "Case studies", body: "What recovering revenue from cancellations looks like." },
+];
 
 export function Explore() {
   return (
@@ -266,25 +266,9 @@ export function Explore() {
           </div>
         }
       >
-        <ul className="rise border-t border-line-strong">
-          {explore.map(([href, title, body]) => (
-            <li key={href} className="border-b border-line">
-              <Link
-                href={href}
-                className="group grid min-h-24 grid-cols-[1fr_auto] items-center gap-x-6 gap-y-1 py-5 md:grid-cols-[minmax(0,0.8fr)_minmax(0,1fr)_auto]"
-              >
-                <span className="t-h3 transition-colors group-hover:text-accent">{title}</span>
-                <span className="order-3 col-span-2 text-base text-body md:order-none md:col-span-1">{body}</span>
-                <span
-                  aria-hidden="true"
-                  className="row-start-1 grid size-11 place-items-center rounded-full border border-line-strong text-ink transition-colors group-hover:border-accent group-hover:bg-accent group-hover:text-white md:row-start-auto"
-                >
-                  <ArrowRightIcon className="size-4" />
-                </span>
-              </Link>
-            </li>
-          ))}
-        </ul>
+        <div className="rise">
+          <LinkRows items={explore} />
+        </div>
       </Editorial>
     </Section>
   );

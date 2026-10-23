@@ -258,3 +258,28 @@ export function TextLink({ href, children }: { href: string; children: ReactNode
     </Cmp>
   );
 }
+
+/** One full-width linked row per destination: title, description, arrow. */
+export function LinkRows({ items }: { items: readonly { href: string; title: string; body: string }[] }) {
+  return (
+    <ul className="border-t border-line-strong">
+      {items.map(({ href, title, body }) => (
+        <li key={href} className="border-b border-line">
+          <Link
+            href={href}
+            className="group grid min-h-24 grid-cols-[1fr_auto] items-center gap-x-6 gap-y-1 py-5 md:grid-cols-[minmax(0,0.8fr)_minmax(0,1fr)_auto]"
+          >
+            <span className="t-h3 transition-colors group-hover:text-accent">{title}</span>
+            <span className="order-3 col-span-2 text-base text-body md:order-none md:col-span-1">{body}</span>
+            <span
+              aria-hidden="true"
+              className="row-start-1 grid size-11 place-items-center rounded-full border border-line-strong text-ink transition-colors group-hover:border-accent group-hover:bg-accent group-hover:text-white md:row-start-auto"
+            >
+              <ArrowRightIcon className="size-4" />
+            </span>
+          </Link>
+        </li>
+      ))}
+    </ul>
+  );
+}
