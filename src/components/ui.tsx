@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { ReactNode } from "react";
 import { ArrowRightIcon, CheckIcon } from "./icons";
 
@@ -6,12 +7,12 @@ export function Container({ children, className = "" }: { children: ReactNode; c
 }
 
 /** Numbered section label: gives the page an editorial index without boxes. */
-export function Label({ n, children, dark = false }: { n: string; children: ReactNode; dark?: boolean }) {
+export function Label({ n, children, dark = false }: { n?: string; children: ReactNode; dark?: boolean }) {
   return (
     <p
       className={`mb-5 flex items-center gap-3 text-sm font-semibold ${dark ? "text-accent-bright" : "text-accent"}`}
     >
-      <span className="tnum">{n}</span>
+      {n && <span className="tnum">{n}</span>}
       <span aria-hidden="true" className="h-px w-8 bg-current opacity-60" />
       {children}
     </p>
@@ -21,7 +22,7 @@ export function Label({ n, children, dark = false }: { n: string; children: Reac
 export function H2({ children, dark = false }: { children: ReactNode; dark?: boolean }) {
   return (
     <h2
-      className={`mb-5 max-w-[22ch] text-[clamp(1.75rem,3.6vw,2.6rem)] font-semibold leading-[1.12] tracking-tight ${dark ? "!text-white" : ""}`}
+      className={`mb-5 max-w-[26ch] text-[clamp(1.75rem,3.6vw,2.6rem)] font-semibold leading-[1.12] tracking-tight ${dark ? "!text-white" : ""}`}
     >
       {children}
     </h2>
@@ -222,25 +223,27 @@ export function ButtonLink({
     variant === "primary"
       ? "bg-accent text-white hover:bg-accent-hover"
       : "border border-line-strong bg-surface text-ink hover:border-ink";
+  const Cmp = href.startsWith("/") ? Link : "a";
   return (
-    <a
+    <Cmp
       href={href}
       className={`inline-flex min-h-12 items-center justify-center gap-2 rounded-lg px-6 text-base font-semibold transition-colors duration-150 ${v}`}
     >
       {children}
       {arrow && <ArrowRightIcon className="size-4" />}
-    </a>
+    </Cmp>
   );
 }
 
 export function TextLink({ href, children }: { href: string; children: ReactNode }) {
+  const Cmp = href.startsWith("/") ? Link : "a";
   return (
-    <a
+    <Cmp
       href={href}
       className="mt-8 inline-flex min-h-11 items-center gap-2 font-semibold text-accent underline decoration-accent/30 underline-offset-4 transition-colors hover:text-accent-hover hover:decoration-current"
     >
       {children}
       <ArrowRightIcon className="size-4" />
-    </a>
+    </Cmp>
   );
 }

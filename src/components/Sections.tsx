@@ -167,7 +167,7 @@ export function MedicalIntake() {
               "Delivered to your records system automatically",
             ]}
           />
-          <TextLink href="#demo">Learn about medical intake</TextLink>
+          <TextLink href="/solutions/medical-intake">Learn about medical intake</TextLink>
         </div>
         <Window title="Patient intake" className="rise">
           <dl className="px-5 py-2">
@@ -219,7 +219,7 @@ export function InsuranceIntake() {
               "Prompts to refresh expired coverage",
             ]}
           />
-          <TextLink href="#demo">Learn about insurance intake</TextLink>
+          <TextLink href="/solutions/insurance-intake">Learn about insurance intake</TextLink>
         </div>
       </TwoCol>
     </Section>
@@ -396,6 +396,7 @@ export function Security() {
             Template copy: replace this block with your real compliance posture. Only claim certifications you
             actually hold.
           </Lead>
+          <TextLink href="/security">Read about security</TextLink>
         </div>
         <dl className="rise grid gap-x-8 sm:grid-cols-2">
           {safeguards.map(([k, v]) => (

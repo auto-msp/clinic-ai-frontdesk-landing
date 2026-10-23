@@ -23,7 +23,7 @@ const description =
   "Template landing page: an AI front desk that answers calls, books visits, gathers intake and refills cancelled slots from a waitlist.";
 
 export const metadata: Metadata = {
-  title,
+  title: { default: title, template: "%s | YourBrand" },
   description,
   openGraph: { title, description, type: "website" },
   twitter: { card: "summary_large_image", title, description },
