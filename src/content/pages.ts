@@ -25,7 +25,8 @@ export type Block =
   | { kind: "faq"; title?: string; items: { q: string; a: string }[] }
   | { kind: "links"; label?: string; title: string; intro?: string; items: { href: string; title: string; body: string }[] }
   | { kind: "prose"; sections: { h: string; p: string[] }[] }
-  | { kind: "contact" };
+  | { kind: "contact" }
+  | { kind: "component"; name: "WaitlistCalling" | "Receptionist" | "Scheduling" | "NoShow" | "Dashboard" };
 
 export type PageData = {
   title: string;
@@ -80,6 +81,9 @@ export const pages: Record<string, PageData> = {
           { title: "Record", sub: "Writes the result to your systems" },
         ],
       },
+      { kind: "component", name: "Receptionist" },
+      { kind: "component", name: "Scheduling" },
+      { kind: "component", name: "Dashboard" },
     ],
   },
 
@@ -154,6 +158,8 @@ export const pages: Record<string, PageData> = {
           ["Fallback", "Hand to front desk"],
         ],
       },
+      { kind: "component", name: "WaitlistCalling" },
+      { kind: "component", name: "NoShow" },
     ],
   },
 

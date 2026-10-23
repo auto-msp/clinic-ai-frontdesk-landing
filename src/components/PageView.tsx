@@ -3,6 +3,7 @@ import Link from "next/link";
 import ContactForm from "./ContactForm";
 import { ArrowRightIcon, ChevronDownIcon, CheckIcon } from "./icons";
 import { Block, defaultClosing, pages } from "@/content/pages";
+import { Dashboard, NoShow, Receptionist, Scheduling, WaitlistCalling } from "./Sections";
 import { ButtonLink, Checks, Container, H2, Label, Lead, Row, Section, Steps, TwoCol, Window } from "./ui";
 
 export function pageMetadata(slug: string): Metadata {
@@ -149,6 +150,12 @@ function renderBlock(b: Block, tone: "plain" | "tint", key: number) {
           </Container>
         </Section>
       );
+
+    case "component": {
+      if (b.name === "WaitlistCalling") return <WaitlistCalling key={key} />;
+      const C = { Receptionist, Scheduling, NoShow, Dashboard }[b.name];
+      return <C key={key} tone={tone} />;
+    }
 
     case "contact":
       return (
