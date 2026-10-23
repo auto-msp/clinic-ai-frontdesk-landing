@@ -8,16 +8,16 @@
  * accent 5.0:1, white on accent 5.2:1, accent-bright on ink 9.1:1.
  */
 @theme inline {
-  --color-paper: #fbfaf7;
+  --color-paper: #f7faf8;
   --color-surface: #ffffff;
-  --color-ink: #10243a;
-  --color-body: #3f4c5a;
-  --color-subtle: #5b6876;
-  --color-line: #e6e2d9;
-  --color-line-strong: #cfcabd;
-  --color-accent: #0b7a75;
-  --color-accent-hover: #086561;
-  --color-accent-soft: #e3f1ef;
+  --color-ink: #142d28;
+  --color-body: #465a54;
+  --color-subtle: #5c6c65;
+  --color-line: #dfe7e2;
+  --color-line-strong: #bacbc1;
+  --color-accent: #176344;
+  --color-accent-hover: #104a32;
+  --color-accent-soft: #e6f1e9;
   --color-accent-bright: #6fd6cd; /* accent on dark (ink) backgrounds */
   --color-ok: #1b6e4a;
   --color-ok-soft: #e4f2ea;
@@ -126,3 +126,97 @@ label[for] {
   }
 
 }
+
+/* AutoMSP: a quiet, botanical SaaS direction with real product hierarchy. */
+.brand { display:flex; align-items:center; gap:10px; color:var(--color-ink); flex-shrink:0; }
+.brand-seal { width:58px; height:58px; border-radius:50%; }
+.brand strong { display:block; font-size:23px; letter-spacing:-1px; line-height:1.15; }
+.brand span span { display:block; font-size:9px; letter-spacing:2px; font-weight:700; margin-top:4px; }
+.home-hero { padding-top:70px; background:#f7faf8; }
+.hero-grid { display:grid; grid-template-columns:1fr 1.04fr; align-items:center; gap:48px; }
+.eyebrow { font-size:11px; letter-spacing:1.7px; font-weight:700; color:var(--color-accent); display:flex; align-items:center; gap:9px; margin-bottom:24px; }
+.status-dot { width:7px; height:7px; background:var(--color-accent); border-radius:50%; box-shadow:0 0 0 5px #e5efe8; margin-right:4px; }
+.hero-copy h1 { font-size:clamp(40px,4.4vw,62px); line-height:1.08; letter-spacing:-2.6px; font-weight:600; }
+.hero-copy h1 em { font-family:Georgia,serif; font-weight:400; color:var(--color-accent); }
+.hero-description { font-size:17px; line-height:1.8; max-width:43ch; margin-top:24px; }
+.hero-assurances { display:flex; gap:18px; flex-wrap:wrap; margin-top:25px; font-size:11px; color:var(--color-subtle); }
+.hero-assurances span { display:flex; align-items:center; gap:6px; }
+.hero-assurances svg { width:15px; height:15px; color:var(--color-accent); }
+.demo-scene { min-width:0; background:#e8eee7; border-radius:24px; padding:24px 20px 16px; position:relative; }
+.scene-label { display:flex; justify-content:space-between; gap:12px; font-size:8px; letter-spacing:1.1px; font-weight:700; color:#526458; margin-bottom:22px; }
+.desk-window { background:white; border:1px solid #d7e1d9; border-radius:12px; box-shadow:0 16px 36px -20px #43574a66; overflow:hidden; }
+.desk-top { display:flex; align-items:center; gap:8px; padding:13px 15px; border-bottom:1px solid var(--color-line); font-size:10px; }
+.mini-mark { display:grid; place-items:center; background:var(--color-accent); color:white; width:23px; height:23px; border-radius:6px; font-weight:700; }
+.sample-pill { margin-left:auto; font-size:9px; color:var(--color-subtle); background:var(--color-paper); border-radius:4px; padding:3px 6px; }
+.desk-body { padding:20px 17px 12px; }
+.desk-body h2 { font-size:17px; max-width:22ch; }
+.desk-body .text-xs { font-size:8px; letter-spacing:1px; }
+.calendar-icon { border:1px solid var(--color-line); border-top:5px solid #e4ebe5; border-radius:6px; padding:4px 10px; font-size:17px; color:var(--color-ink); }
+.desk-metrics { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin:20px 0 24px; }
+.desk-metrics div { background:#f3f6f2; padding:12px; border-radius:6px; }
+.desk-metrics strong { display:block; font-size:26px; font-weight:500; line-height:1.15; color:var(--color-ink); }
+.desk-metrics span { font-size:9px; color:var(--color-subtle); }
+.schedule-heading { display:flex; justify-content:space-between; gap:10px; font-size:10px; font-weight:600; margin-bottom:9px; }
+.schedule-heading span+span { font-size:8px; letter-spacing:1px; color:var(--color-subtle); }
+.schedule-row { display:flex; gap:12px; align-items:center; border-top:1px solid #edf1ed; padding:12px 4px; font-size:9px; }
+.schedule-row time { color:var(--color-subtle); white-space:nowrap; }
+.schedule-row div { flex:1; }
+.schedule-row strong,.schedule-row div span { display:block; }
+.schedule-row strong { font-size:10px; color:var(--color-ink); font-weight:600; }
+.schedule-row div span { margin-top:2px; color:var(--color-subtle); font-size:8px; }
+.slot-state { font-size:8px; background:#edf3ed; color:#266444; border-radius:4px; padding:3px 5px; }
+.recovered { background:#f0f6ed; border-left:2px solid #83a16f; padding-left:7px; }
+.workflow-link { display:flex; align-items:center; justify-content:space-between; min-height:44px; font-size:10px; color:var(--color-accent); margin-top:5px; }
+.call-card { position:relative; display:flex; align-items:center; gap:10px; margin:14px -6px 0 22px; background:white; padding:14px; border:1px solid var(--color-line); border-radius:10px; box-shadow:0 8px 20px -15px #254b35; }
+.call-symbol { width:34px; height:34px; background:#e8f2e8; color:var(--color-accent); border-radius:50%; display:grid; place-items:center; flex-shrink:0; }
+.call-symbol svg { width:17px; height:17px; }
+.call-card strong { font-size:10px; display:block; color:var(--color-ink); }
+.call-card div span { font-size:9px; color:var(--color-subtle); display:block; margin-top:2px; }
+.audio-bars { margin-left:auto; display:flex; gap:3px; align-items:center; }
+.audio-bars i { display:block; width:3px; height:13px; background:#84a47d; border-radius:2px; }
+.audio-bars i:nth-child(2n) { height:23px; }
+.audio-bars i:nth-child(3) { height:31px; }
+.scene-caption { text-align:center; font-size:9px; color:#526458; margin-top:14px; }
+.capability-strip { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:20px; padding:32px 0; margin-top:60px; border-top:1px solid var(--color-line); }
+.capability-strip span { font-size:9px; font-weight:700; letter-spacing:1.4px; color:var(--color-subtle); }
+.capability-strip p { font-size:13px; font-weight:600; color:var(--color-ink); }
+.capability-strip b { color:#aebfb3; font-weight:400; }
+.workflow-section { padding:90px 0; background:white; }
+.section-intro { display:flex; justify-content:space-between; align-items:flex-end; gap:35px; margin-bottom:38px; }
+.section-intro h2,.human-section h2,.closing-panel h2 { font-size:clamp(30px,3.4vw,44px); line-height:1.12; font-weight:500; letter-spacing:-1.5px; }
+.section-intro>p { font-size:14px; line-height:1.9; padding-bottom:4px; }
+.workflow-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+.workflow-card { display:flex; flex-direction:column; padding:28px; border:1px solid var(--color-line); border-radius:12px; background:#fbfcfa; transition:background 180ms,border-color 180ms; }
+.workflow-card:hover { background:#eef4ed; border-color:#9db9a5; }
+.card-number { display:flex; justify-content:space-between; color:var(--color-accent); font-size:12px; font-weight:600; margin-bottom:40px; }
+.workflow-card h3 { font-size:24px; line-height:1.2; letter-spacing:-.6px; font-weight:500; margin-bottom:16px; }
+.workflow-card>p { font-size:14px; line-height:1.8; margin-bottom:28px; }
+.card-link { margin-top:auto; color:var(--color-accent); font-size:12px; font-weight:700; }
+.human-section { padding:90px 0; background:#edf2ec; }
+.human-grid { display:grid; grid-template-columns:1fr 1fr; gap:90px; align-items:center; }
+.human-grid>div>p:not(.eyebrow) { font-size:16px; line-height:1.9; margin:24px 0 28px; max-width:43ch; }
+.principle-list li { display:flex; gap:22px; border-bottom:1px solid #d2dfd3; padding:25px 0; }
+.principle-list li:last-child { border:0; }
+.principle-list li>span { color:var(--color-accent); font-size:12px; padding-top:4px; }
+.principle-list h3 { font-size:20px; font-weight:600; margin-bottom:8px; }
+.principle-list p { font-size:14px; line-height:1.8; }
+.closing-section { padding:72px 0; background:white; }
+.closing-panel { border-radius:16px; background:#173e2e; color:#d6e6da; padding:50px; display:flex; align-items:center; justify-content:space-between; gap:32px; }
+.closing-panel h2 { color:white; }
+.closing-panel .eyebrow { color:#c6d9a9; }
+.closing-panel p:not(.eyebrow) { margin-top:18px; font-size:14px; }
+.closing-panel>a { background:#deedca; color:#173e2e; flex-shrink:0; }
+.closing-panel>a:hover { background:#cfdfb8; }
+.inner-hero { background:#edf2ec; }
+.breadcrumb { display:inline-flex; min-height:44px; font-size:11px; color:var(--color-subtle); margin-bottom:20px; }
+.booking-page { padding:80px 0; min-height:65vh; }
+.booking-page h1 { font-size:clamp(36px,5vw,60px); line-height:1.1; letter-spacing:-2px; max-width:24ch; }
+.booking-lead { font-size:18px; max-width:54ch; margin:24px 0 40px; }
+.booking-panel { display:grid; grid-template-columns:1fr 1fr; border:1px solid var(--color-line); border-radius:16px; overflow:hidden; }
+.booking-panel>div { padding:36px; background:white; }
+.booking-panel>div:first-child { background:#e8eee4; }
+.booking-panel h2 { font-size:24px; font-weight:600; margin-bottom:20px; }
+.booking-panel li { margin:12px 0; }
+.booking-panel p { margin-bottom:24px; }
+@media(max-width:1023px) { .hero-grid { gap:30px; } .hero-copy h1 { font-size:43px; } .hero-grid { grid-template-columns:1fr; } .hero-copy { max-width:650px; } .demo-scene { max-width:600px; width:100%; margin:auto; } .human-grid { gap:45px; } }
+@media(max-width:639px) { .home-hero { padding-top:42px; } .hero-copy h1 { font-size:42px; letter-spacing:-1.8px; } .hero-description { font-size:16px; } .hero-assurances { gap:12px; } .demo-scene { padding:18px 12px 12px; border-radius:14px; } .desk-body { padding:15px 12px 10px; } .call-card { margin-left:0; margin-right:0; padding:10px; } .scene-label { font-size:7px; } .capability-strip { margin-top:36px; justify-content:flex-start; gap:14px; } .capability-strip>span { width:100%; } .capability-strip p { font-size:11px; } .capability-strip b { display:none; } .section-intro { display:block; } .section-intro>p { margin-top:20px; } .workflow-grid,.human-grid,.booking-panel { grid-template-columns:1fr; } .workflow-section,.human-section { padding:56px 0; } .card-number { margin-bottom:24px; } .workflow-card { padding:24px; } .closing-panel { padding:30px 24px; flex-direction:column; align-items:flex-start; } .closing-section { padding:40px 0; } .brand-seal { width:52px; height:52px; } .booking-page { padding:48px 0; } .booking-panel>div { padding:26px; } }

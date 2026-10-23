@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { cacheLife } from "next/cache";
 import { legal, nav } from "@/content/nav";
 import { Container } from "./ui";
@@ -51,7 +52,7 @@ export default async function Footer() {
       <Container>
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.4fr_repeat(4,1fr)]">
           <div>
-            <p className="font-display text-lg font-semibold text-ink">YourBrand</p>
+            <Image src="/brand/automsp-light.png" alt="AutoMSP — AI Automation Services" width={156} height={156} className="mb-4 rounded-full" /><p className="font-display text-lg font-semibold text-ink">AutoMSP AI Front Desk</p>
             <p className="mt-2 max-w-[28ch] text-[0.95rem] text-body">
               An AI front desk that answers calls, books visits and refills cancelled slots.
             </p>
@@ -72,8 +73,8 @@ export default async function Footer() {
           ))}
         </div>
         <div className="mt-12 flex flex-wrap items-center justify-between gap-3 border-t border-line pt-6">
-          <span>© {new Date().getFullYear()} YourBrand. Template, not an official site.</span>
-          <span>Replace the placeholder contact details and legal pages before launch.</span>
+          <span>© {new Date().getFullYear()} AutoMSP. All rights reserved.</span>
+          <span>AI automation. A more human front desk.</span>
         </div>
       </Container>
     </footer>

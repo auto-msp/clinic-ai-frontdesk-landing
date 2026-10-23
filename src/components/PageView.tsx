@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import ContactForm from "./ContactForm";
-import { ArrowRightIcon, ChevronDownIcon, CheckIcon } from "./icons";
+import { demoHref } from "@/content/site";
+import { ArrowRightIcon, ChevronDownIcon } from "./icons";
 import { Block, defaultClosing, pages } from "@/content/pages";
 import { Dashboard, NoShow, Receptionist, Scheduling, WaitlistCalling } from "./Sections";
 import { ButtonLink, Checks, Container, H2, Label, Lead, Row, Section, Steps, TwoCol, Window } from "./ui";
@@ -167,24 +168,7 @@ function renderBlock(b: Block, tone: "plain" | "tint", key: number) {
               <Lead>
                 A few details are enough to start. We&apos;ll follow up with questions only if we need them.
               </Lead>
-              <dl className="mt-8 space-y-4 text-[0.95rem]">
-                <div>
-                  <dt className="font-semibold text-ink">Email</dt>
-                  <dd className="text-body">hello@yourbrand.example</dd>
-                </div>
-                <div>
-                  <dt className="font-semibold text-ink">Phone</dt>
-                  <dd className="tnum text-body">+1 555 0100</dd>
-                </div>
-                <div>
-                  <dt className="font-semibold text-ink">Hours</dt>
-                  <dd className="text-body">Monday to Friday, 9:00 AM to 6:00 PM</dd>
-                </div>
-              </dl>
-              <p className="mt-6 flex items-start gap-2 text-sm text-subtle">
-                <CheckIcon className="mt-0.5 size-4 shrink-0" />
-                Placeholder contact details. Replace them before launch.
-              </p>
+
             </div>
             <div className="rounded-xl border border-line bg-surface p-6 shadow-window sm:p-8">
               <h2 className="font-display text-xl font-semibold">Request information</h2>
@@ -202,8 +186,9 @@ export default function PageView({ slug }: { slug: string }) {
 
   return (
     <>
-      <section className="border-b border-line pb-16 pt-14 md:pb-20 md:pt-20">
+      <section className="inner-hero border-b border-line pb-16 pt-14 md:pb-20 md:pt-20">
         <Container>
+          <Link href="/" className="breadcrumb">Home / AutoMSP AI Front Desk</Link>
           <p className="mb-6 text-sm font-semibold text-accent">{page.label}</p>
           <h1 className="max-w-[24ch] text-[clamp(2.1rem,4.8vw,3.4rem)] font-semibold leading-[1.08] tracking-tight">
             {page.h1}
@@ -216,7 +201,7 @@ export default function PageView({ slug }: { slug: string }) {
               role="note"
               className="mt-8 max-w-[62ch] border-l-2 border-amber bg-amber-soft px-4 py-3 text-sm text-ink"
             >
-              <strong className="font-semibold">Template note: </strong>
+              <strong className="font-semibold">Please note: </strong>
               {page.notice}
             </p>
           )}
@@ -233,8 +218,8 @@ export default function PageView({ slug }: { slug: string }) {
             </h2>
             <p className="mb-8 max-w-[58ch] text-lg text-white/80">{closing.body}</p>
             <div className="flex flex-wrap gap-3">
-              <ButtonLink href={closing.primary.href} arrow>
-                {closing.primary.label}
+              <ButtonLink href={closing.primary.href === "/contact" ? demoHref : closing.primary.href} arrow>
+                {closing.primary.href === "/contact" ? "Book a demo" : closing.primary.label}
               </ButtonLink>
               {closing.secondary && (
                 <ButtonLink href={closing.secondary.href} variant="secondary">

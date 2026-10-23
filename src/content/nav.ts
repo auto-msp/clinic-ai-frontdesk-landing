@@ -5,7 +5,6 @@ export type NavItem =
 
 /** Single source of truth for the header, mobile menu and footer. */
 export const nav: NavItem[] = [
-  { label: "Home", href: "/" },
   { label: "Product", href: "/product" },
   {
     label: "Solutions",
@@ -17,21 +16,18 @@ export const nav: NavItem[] = [
     ],
   },
   { label: "Security", href: "/security" },
-  { label: "Technology", href: "/technology" },
-  { label: "Case Studies", href: "/case-studies" },
   { label: "Pricing", href: "/pricing" },
-  { label: "FAQ", href: "/faq" },
-  { label: "Support", href: "/support" },
   {
     label: "About",
     children: [
       { href: "/about", title: "About us", desc: "Our mission and approach" },
-      { href: "/leadership", title: "Leadership", desc: "The people behind it" },
+      { href: "/faq", title: "FAQs", desc: "Answers before you get started" },
+      { href: "/support", title: "Support", desc: "Implementation and ongoing help" },
+      { href: "/contact", title: "Contact", desc: "Start a conversation" },
       { href: "/implementation", title: "Implementation", desc: "How a rollout works" },
       { href: "/integrations", title: "Integrations", desc: "Calendars, records and phone systems" },
     ],
   },
-  { label: "Contact", href: "/contact" },
 ];
 
 export const legal = [

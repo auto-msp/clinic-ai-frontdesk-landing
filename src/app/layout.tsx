@@ -18,12 +18,12 @@ const noto = Noto_Sans({
   display: "swap",
 });
 
-const title = "YourBrand | AI Front Desk for Clinics";
+const title = "AutoMSP AI Front Desk | AI Front Desk for Clinics";
 const description =
-  "Template landing page: an AI front desk that answers calls, books visits, gathers intake and refills cancelled slots from a waitlist.";
+  "Explore AI-powered call handling, appointment scheduling and waitlist workflows for your clinic.";
 
 export const metadata: Metadata = {
-  title: { default: title, template: "%s | YourBrand" },
+  title: { default: title, template: "%s | AutoMSP AI Front Desk" },
   description,
   openGraph: { title, description, type: "website" },
   twitter: { card: "summary_large_image", title, description },
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#fbfaf7",
+  themeColor: "#f7faf8",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

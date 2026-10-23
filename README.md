@@ -47,3 +47,7 @@ The UI follows the UI/UX Pro Max skill (kept in `.claude/skills/ui-ux-pro-max`):
 - Add real Privacy, Terms and Contact links to `Footer.tsx`.
 - Rewrite `src/content/pages.ts`: every inner page is template copy. Case study numbers are placeholders, and the Security, Integrations and legal pages must reflect reality (have a lawyer review Privacy and Terms).
 - Do not reuse any other company's name, logo, imagery or marketing text.
+
+## AutoMSP redesign
+
+The design decisions and UI UX Pro Max application are documented in `design-system/automsp-ai-front-desk/MASTER.md`. Set `NEXT_PUBLIC_BOOKING_URL` to your HTTPS scheduling URL in Vercel and rebuild. All demo CTAs share this value; absent or invalid URLs show an honest pending page, with no fake form submissions. This remains a marketing demo, not a live patient-management system. Review product claims, integration availability and legal pages before production.

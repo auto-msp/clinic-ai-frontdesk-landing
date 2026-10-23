@@ -1,27 +1,13 @@
 "use client";
 
 import Link from "next/link";
+import Brand from "./Brand";
+import { demoHref } from "@/content/site";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { nav, type NavItem } from "@/content/nav";
 import { ChevronDownIcon, CloseIcon, MenuIcon } from "./icons";
 import { ButtonLink } from "./ui";
-
-function Wordmark({ onClick }: { onClick?: () => void }) {
-  return (
-    <Link
-      href="/"
-      onClick={onClick}
-      className="flex min-h-11 shrink-0 items-center gap-2.5 font-display text-xl font-semibold tracking-tight text-ink"
-    >
-      <svg viewBox="0 0 28 28" className="size-7" aria-hidden="true" focusable="false">
-        <rect width="28" height="28" rx="7" fill="#0b7a75" />
-        <path d="M9 8.5 14 15l5-6.5M14 15v5.5" fill="none" stroke="#fff" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-      YourBrand
-    </Link>
-  );
-}
 
 const isActive = (pathname: string, href: string) => (href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(href + "/"));
 const groupActive = (pathname: string, item: NavItem) => "children" in item && item.children.some((c) => isActive(pathname, c.href));
@@ -69,8 +55,8 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-line bg-paper">
-      <div className="relative mx-auto flex h-[68px] w-full max-w-[1360px] items-center justify-between gap-4 px-5 sm:px-8">
-        <Wordmark onClick={closeAll} />
+      <div className="relative mx-auto flex h-[84px] w-full max-w-[1360px] items-center justify-between gap-4 px-5 sm:px-8">
+        <Brand onClick={closeAll} />
 
         <nav ref={navRef} aria-label="Main" className="hidden xl:block">
           <ul className="flex items-center">
@@ -128,7 +114,7 @@ export default function Header() {
         </nav>
 
         <div className="hidden shrink-0 xl:block">
-          <ButtonLink href="/contact">Join Waitlist</ButtonLink>
+          <ButtonLink href={demoHref}>Book a demo</ButtonLink>
         </div>
 
         <button
@@ -146,7 +132,7 @@ export default function Header() {
           <nav
             id="mobile-menu"
             aria-label="Mobile"
-            className="absolute inset-x-0 top-[68px] max-h-[calc(100dvh-68px)] overflow-y-auto border-b border-line bg-paper px-5 pb-6 pt-2 shadow-window sm:px-8 xl:hidden"
+            className="absolute inset-x-0 top-[84px] max-h-[calc(100dvh-84px)] overflow-y-auto border-b border-line bg-paper px-5 pb-6 pt-2 shadow-window sm:px-8 xl:hidden"
           >
             <ul className="flex flex-col text-base font-medium text-ink">
               {nav.map((item) =>
@@ -183,11 +169,11 @@ export default function Header() {
               )}
               <li className="pt-5">
                 <Link
-                  href="/contact"
+                  href={demoHref}
                   onClick={closeAll}
                   className="flex min-h-12 items-center justify-center rounded-lg bg-accent font-semibold text-white"
                 >
-                  Join Waitlist
+                  Book a demo
                 </Link>
               </li>
             </ul>
