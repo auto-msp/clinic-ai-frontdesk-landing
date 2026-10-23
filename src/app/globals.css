@@ -1,35 +1,42 @@
 @import "tailwindcss";
 
 /*
- * Design tokens. Direction: calm clinical editorial (Minimalism / Swiss style
- * per the UI/UX Pro Max search): warm paper, deep ink, ONE accent, hairline
- * rules instead of boxed cards, no gradients.
- * Contrast (WCAG AA, computed): ink on paper 15.1:1, body 8.4:1, subtle 5.5:1,
- * accent 5.0:1, white on accent 5.2:1, accent-bright on ink 9.1:1.
+ * Design tokens. Direction "Ink & Clay", chosen from the UI/UX Pro Max
+ * searches: the healthcare palettes in its data are all cyan/teal/sky, which is
+ * exactly the look every clinic-software site shares, so this takes the skill's
+ * warm-ink-on-cream and navy-plus-warm-metal families instead. Warm paper, deep
+ * blue-black ink, ONE clay accent. Type: Calistoga (human warmth) + Inter +
+ * JetBrains Mono for labels. Sharp-ish corners and visible ink borders instead
+ * of soft shadows (skill "high variance" style notes).
+ *
+ * Contrast (WCAG AA, computed): ink on paper 15.3:1, body 9.1:1, subtle 5.6:1,
+ * accent on paper 5.6:1, white on accent 6.3:1, accent-bright on ink 8.8:1,
+ * ok on ok-soft 5.4:1, gold on gold-soft 5.7:1.
  */
 @theme inline {
-  --color-paper: #fbfaf7;
-  --color-surface: #ffffff;
-  --color-ink: #10243a;
-  --color-body: #3f4c5a;
-  --color-subtle: #5b6876;
-  --color-line: #e6e2d9;
-  --color-line-strong: #cfcabd;
-  --color-ghost: #857f70; /* large decorative numerals only: 3.8:1 on paper, 4.0:1 on white */
-  --color-accent: #0b7a75;
-  --color-accent-hover: #086561;
-  --color-accent-soft: #e3f1ef;
-  --color-accent-bright: #6fd6cd; /* accent on dark (ink) backgrounds */
-  --color-ok: #1b6e4a;
-  --color-ok-soft: #e4f2ea;
-  --color-amber: #8a5a00;
-  --color-amber-soft: #fbf0d9;
+  --color-paper: #f6f1e8;
+  --color-paper-2: #ede5d6;
+  --color-surface: #fffcf7;
+  --color-ink: #121b2e;
+  --color-body: #394152;
+  --color-subtle: #596070;
+  --color-line: #dfd5c3;
+  --color-line-strong: #c3b6a0;
+  --color-ghost: #8c8272; /* large decorative numerals only: 3.4:1 on paper, 3.7:1 on white */
+  --color-accent: #a93b12;
+  --color-accent-hover: #862d0b;
+  --color-accent-soft: #f4dfd1;
+  --color-accent-bright: #f3a883; /* accent on dark (ink) backgrounds */
+  --color-ok: #2b6a3c;
+  --color-ok-soft: #e2eedd;
+  --color-amber: #765000;
+  --color-amber-soft: #f2e4bc;
 
-  --font-sans: var(--font-noto), system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-display: var(--font-figtree), system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-sans: var(--font-inter), system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: var(--font-calistoga), Georgia, "Times New Roman", serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, "SFMono-Regular", Menlo, monospace;
 
-  --shadow-window:
-    0 1px 0 rgb(16 36 58 / 0.04), 0 28px 56px -28px rgb(16 36 58 / 0.28);
+  --shadow-window: 5px 5px 0 0 rgb(18 27 46 / 0.12);
 }
 
 :root {
@@ -54,8 +61,23 @@ h1,
 h2,
 h3 {
   font-family: var(--font-display);
+  font-weight: 400;
   color: var(--color-ink);
   text-wrap: balance;
+}
+
+/* Calistoga ships one weight; stop the browser faking a bolder one. */
+h1,
+h2,
+h3,
+h4,
+.font-display,
+.t-display,
+.t-title,
+.t-h2,
+.t-h3,
+.t-num {
+  font-synthesis-weight: none;
 }
 
 p {
@@ -69,7 +91,7 @@ p {
   border-radius: 4px;
 }
 
-/* On the ink background the teal ring is too dim (2.5:1); use the bright tint (9.1:1). */
+/* On the ink background the clay ring is too dim; use the bright tint (8.8:1). */
 .on-ink :focus-visible {
   outline-color: var(--color-accent-bright);
 }
@@ -82,36 +104,36 @@ p {
 .t-display {
   font-family: var(--font-display);
   font-size: clamp(2.6rem, 1.5rem + 4.6vw, 4.5rem);
-  font-weight: 600;
-  line-height: 0.98;
-  letter-spacing: -0.035em;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.02em;
   color: var(--color-ink);
   text-wrap: balance;
 }
 .t-title {
   font-family: var(--font-display);
   font-size: clamp(2.35rem, 1.4rem + 4.2vw, 4.25rem);
-  font-weight: 600;
-  line-height: 1.02;
-  letter-spacing: -0.03em;
+  font-weight: 400;
+  line-height: 1.04;
+  letter-spacing: -0.02em;
   color: var(--color-ink);
   text-wrap: balance;
 }
 .t-h2 {
   font-family: var(--font-display);
   font-size: clamp(1.9rem, 1.3rem + 2.6vw, 3.1rem);
-  font-weight: 600;
-  line-height: 1.06;
-  letter-spacing: -0.025em;
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -0.015em;
   color: var(--color-ink);
   text-wrap: balance;
 }
 .t-h3 {
   font-family: var(--font-display);
   font-size: 1.3125rem;
-  font-weight: 600;
+  font-weight: 400;
   line-height: 1.25;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.005em;
   color: var(--color-ink);
 }
 .t-lead {
@@ -119,16 +141,16 @@ p {
   line-height: 1.55;
 }
 .t-eyebrow {
-  font-size: 0.8125rem;
-  font-weight: 600;
-  letter-spacing: 0.09em;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 .t-num {
   font-family: var(--font-display);
-  font-weight: 600;
-  letter-spacing: -0.03em;
-  font-variant-numeric: tabular-nums;
+  font-weight: 400;
+  letter-spacing: -0.02em;
 }
 
 a,

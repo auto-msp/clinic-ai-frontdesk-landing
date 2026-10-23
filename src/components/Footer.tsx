@@ -26,8 +26,7 @@ export default async function Footer() {
           <div className="sm:col-span-2 lg:col-span-1">
             <p className="flex items-center gap-2.5 font-display text-xl font-semibold text-ink">
               <svg viewBox="0 0 28 28" className="size-7" aria-hidden="true" focusable="false">
-                <rect width="28" height="28" rx="7" fill="#0b7a75" />
-                <path d="M9 8.5 14 15l5-6.5M14 15v5.5" fill="none" stroke="#fff" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+                <rect width="28" height="28" rx="6" fill="#121b2e"/><path d="M8.5 8 14 15.5 19.5 8" fill="none" stroke="#f6f1e8" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 15.5V21" fill="none" stroke="#f6f1e8" stroke-width="2.6" stroke-linecap="round"/><circle cx="21.5" cy="21" r="2.4" fill="#e0743f"/>
               </svg>
               YourBrand
             </p>

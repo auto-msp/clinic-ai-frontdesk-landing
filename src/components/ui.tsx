@@ -46,7 +46,7 @@ export function Section({
 }) {
   const tones = {
     plain: "bg-paper",
-    tint: "bg-surface border-y border-line",
+    tint: "bg-paper-2",
     ink: "on-ink bg-ink text-white",
   } as const;
   const spaces = {
