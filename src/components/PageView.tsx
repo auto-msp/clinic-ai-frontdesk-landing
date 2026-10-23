@@ -59,7 +59,7 @@ function renderBlock(b: Block, tone: Tone, key: number, ctx: { feature: number; 
             <ol className={`grid gap-x-10 gap-y-12 ${b.cols === 3 ? "md:grid-cols-3" : "sm:grid-cols-2"}`}>
               {b.items.map((it, i) => (
                 <li key={it.title}>
-                  <span aria-hidden="true" className="t-num block text-5xl text-line-strong">
+                  <span aria-hidden="true" className="t-num block text-5xl text-ghost">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <h3 className="t-h3 mb-2 mt-4 border-t-2 border-ink pt-4">{it.title}</h3>
@@ -132,7 +132,7 @@ function renderBlock(b: Block, tone: Tone, key: number, ctx: { feature: number; 
           <Editorial
             head={
               <div>
-                <p className="t-num text-[clamp(4rem,3rem+4vw,6.5rem)] leading-none text-line-strong" aria-hidden="true">
+                <p className="t-num text-[clamp(4rem,3rem+4vw,6.5rem)] leading-none text-ghost" aria-hidden="true">
                   {String(b.items.length).padStart(2, "0")}
                 </p>
                 <p className="t-eyebrow mt-3 text-accent">{b.title ?? "Questions"}</p>

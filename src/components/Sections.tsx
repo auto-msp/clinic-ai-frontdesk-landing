@@ -292,7 +292,7 @@ export function Audience() {
         <ol className="mt-14 grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
           {audience.map(([t, d], i) => (
             <li key={t} className={`rise ${i % 2 === 1 ? "lg:mt-14" : ""}`}>
-              <span className="t-num block text-5xl text-line-strong" aria-hidden="true">
+              <span className="t-num block text-5xl text-ghost" aria-hidden="true">
                 {String(i + 1).padStart(2, "0")}
               </span>
               <h3 className="t-h3 mb-2 mt-4 border-t-2 border-ink pt-4">{t}</h3>
