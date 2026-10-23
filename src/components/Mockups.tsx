@@ -7,6 +7,18 @@ import { Chip, Window } from "./ui";
  * labels it as sample data; names, times and numbers are placeholders.
  */
 
+/** Static waveform: deterministic bar heights, decorative only. */
+export function Wave({ bars = 30, className = "" }: { bars?: number; className?: string }) {
+  const heights = Array.from({ length: bars }, (_, i) => 6 + Math.round(Math.abs(Math.sin(i * 1.7) * 24 + Math.cos(i * 0.55) * 8)));
+  return (
+    <svg viewBox={`0 0 ${bars * 6} 40`} preserveAspectRatio="none" aria-hidden="true" focusable="false" className={className}>
+      {heights.map((h, i) => (
+        <rect key={i} x={i * 6} y={20 - h / 2} width="3" height={h} rx="1.5" fill="currentColor" />
+      ))}
+    </svg>
+  );
+}
+
 const transcript = [
   ["Assistant", "Riverside Clinic, how can I help?"],
   ["Patient", "I need to see someone about a recurring headache, ideally Friday morning."],
@@ -14,18 +26,44 @@ const transcript = [
   ["Patient", "Yes please."],
 ] as const;
 
+/** A live call: waveform, speech bubbles, what the assistant understood, and the result. */
 export function CallMock({ className = "" }: { className?: string }) {
   return (
-    <Window title="Inbound call · 7:48 PM" tag="Sample transcript" className={className}>
-      <ul className="px-5">
-        {transcript.map(([who, text]) => (
-          <li key={text} className="grid grid-cols-[5.5rem_1fr] gap-4 border-b border-line py-4 text-base last:border-0">
-            <span className={`text-sm font-semibold ${who === "Assistant" ? "text-accent" : "text-subtle"}`}>{who}</span>
-            <span className="text-ink">{text}</span>
-          </li>
-        ))}
+    <Window title="Live call · 7:48 PM" tag="Sample transcript" className={className}>
+      <div className="flex items-center gap-4 border-b border-line bg-paper px-5 py-3">
+        <span className="flex items-center gap-2 text-sm font-semibold text-ink">
+          <span aria-hidden="true" className="size-2.5 rounded-full bg-accent" />
+          On call
+        </span>
+        <Wave className="h-8 flex-1 text-accent" />
+        <span className="tnum text-sm text-subtle">00:42</span>
+      </div>
+      <ul className="space-y-3 px-5 py-5">
+        {transcript.map(([who, text]) => {
+          const bot = who === "Assistant";
+          return (
+            <li key={text} className={`flex ${bot ? "justify-start" : "justify-end"}`}>
+              <p className={`max-w-[88%] rounded-md px-4 py-2.5 text-base ${bot ? "bg-ink text-white" : "bg-paper-2 text-ink"}`}>
+                <span className="t-eyebrow mb-1 block text-[0.6875rem] opacity-80">{who}</span>
+                {text}
+              </p>
+            </li>
+          );
+        })}
       </ul>
-      <p className="flex items-start gap-3 border-t border-line bg-ok-soft px-5 py-4 text-base font-medium text-ok">
+      <dl className="grid grid-cols-3 border-y border-line bg-paper text-sm">
+        {[
+          ["Intent", "Book a visit"],
+          ["Wants", "Friday morning"],
+          ["Provider", "Dr. Example"],
+        ].map(([k, v], i) => (
+          <div key={k} className={`px-4 py-3 ${i > 0 ? "border-l border-line" : ""}`}>
+            <dt className="t-eyebrow text-[0.6875rem] text-subtle">{k}</dt>
+            <dd className="font-medium text-ink">{v}</dd>
+          </div>
+        ))}
+      </dl>
+      <p className="flex items-start gap-3 bg-ok-soft px-5 py-4 text-base font-medium text-ok">
         <CheckIcon className="mt-0.5 size-5 shrink-0" strokeWidth={2.25} />
         <span>Booked: Fri 9:30 AM with Dr. Example. Confirmation text and intake link sent.</span>
       </p>
@@ -33,37 +71,106 @@ export function CallMock({ className = "" }: { className?: string }) {
   );
 }
 
-type Slot = { time: string; who: string; kind: "booked" | "filled" | "open" };
-const slots: Slot[] = [
-  { time: "9:00", who: "Patient A", kind: "booked" },
-  { time: "9:30", who: "Patient B", kind: "booked" },
-  { time: "10:00", who: "Patient C", kind: "filled" },
-  { time: "10:30", who: "Open", kind: "open" },
-  { time: "11:00", who: "Patient D", kind: "booked" },
-  { time: "2:00", who: "Patient E", kind: "filled" },
-  { time: "2:30", who: "Patient F", kind: "booked" },
-  { time: "3:00", who: "Open", kind: "open" },
+type Cell = "booked" | "filled" | "open" | "hot";
+const days = ["Mon", "Tue", "Wed", "Thu", "Fri"];
+const grid: { time: string; cells: Cell[] }[] = [
+  { time: "9:00", cells: ["booked", "booked", "open", "booked", "booked"] },
+  { time: "10:00", cells: ["booked", "filled", "booked", "booked", "open"] },
+  { time: "11:00", cells: ["open", "booked", "booked", "booked", "filled"] },
+  { time: "2:00", cells: ["booked", "booked", "filled", "hot", "booked"] },
+  { time: "3:00", cells: ["filled", "open", "booked", "open", "booked"] },
 ];
+const cellStyle: Record<Cell, string> = {
+  booked: "bg-paper-2 text-subtle",
+  filled: "bg-ok-soft text-ok",
+  open: "border border-dashed border-amber bg-transparent text-amber",
+  hot: "bg-accent text-white",
+};
+const cellLabel: Record<Cell, string> = { booked: "Booked", filled: "Auto-filled", open: "Open", hot: "Refilled" };
 
+/** Week view: every slot is one of four states, and the state is always spelled out in text. */
 export function ScheduleMock({ className = "" }: { className?: string }) {
   return (
-    <Window title="Schedule view" className={className}>
-      <ul>
-        {slots.map((s) => (
-          <li key={s.time} className="flex items-center gap-4 border-b border-line px-5 py-3 text-base last:border-0">
-            <span className="tnum w-12 shrink-0 text-subtle">{s.time}</span>
-            <span className={`flex-1 ${s.kind === "open" ? "text-subtle" : "text-ink"}`}>{s.who}</span>
-            {s.kind === "booked" && <Chip>Booked</Chip>}
-            {s.kind === "filled" && (
-              <Chip tone="ok" check>
-                Auto-filled
-              </Chip>
-            )}
-            {s.kind === "open" && <Chip tone="amber">Open</Chip>}
-          </li>
-        ))}
-      </ul>
+    <Window title="Week view · Dr. Example" tag="Sample data" className={className}>
+      <div className="p-4 sm:p-5">
+        <table className="w-full table-fixed border-separate border-spacing-1 text-center">
+          <caption className="sr-only">Sample week schedule showing booked, auto-filled, open and refilled slots</caption>
+          <thead>
+            <tr>
+              <th className="w-12" />
+              {days.map((d, i) => (
+                <th key={d} className={`t-eyebrow pb-1 text-[0.6875rem] text-subtle ${i < 2 ? "hidden sm:table-cell" : ""}`} scope="col">
+                  {d}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {grid.map((r) => (
+              <tr key={r.time}>
+                <th scope="row" className="tnum pr-1 text-right text-xs font-medium text-subtle">
+                  {r.time}
+                </th>
+                {r.cells.map((c, i) => (
+                  <td
+                    key={i}
+                    className={`t-eyebrow h-11 rounded-sm px-0.5 align-middle text-[0.625rem] leading-tight tracking-[0.04em] ${cellStyle[c]} ${i < 2 ? "hidden sm:table-cell" : ""}`}
+                  >
+                    {cellLabel[c]}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p className="border-t border-line bg-paper px-5 py-3 text-sm text-subtle">
+        <span className="font-semibold text-ink">Thu 2:00</span> was a cancellation. The waitlist call refilled it in two minutes.
+      </p>
     </Window>
+  );
+}
+
+const weekly = [6, 8, 7, 10, 9, 12];
+const target = 10;
+
+/** Bar chart in custom SVG: values labelled directly, target line labelled, summary as text. */
+function SlotsChart() {
+  const w = 340;
+  const h = 150;
+  const base = 120;
+  const max = 14;
+  const bar = 34;
+  const step = 52;
+  const y = (v: number) => base - (v / max) * 100;
+  return (
+    <svg
+      viewBox={`0 0 ${w} ${h}`}
+      role="img"
+      aria-label={`Bar chart, sample data: slots filled per week over six weeks were ${weekly.join(", ")}, against a target of ${target}.`}
+      className="h-auto w-full"
+    >
+      <line x1="0" x2={w} y1={base} y2={base} stroke="#c3b6a0" strokeWidth="1" />
+      <line x1="0" x2={w} y1={y(target)} y2={y(target)} stroke="#121b2e" strokeWidth="1" strokeDasharray="4 4" />
+      <text x={w} y={y(target) - 5} textAnchor="end" fontSize="12" fill="#121b2e" fontWeight="600">
+        Target {target}
+      </text>
+      {weekly.map((v, i) => {
+        const x = 8 + i * step;
+        const last = i === weekly.length - 1;
+        return (
+          <g key={i}>
+            <rect x={x} y={y(v)} width={bar} height={base - y(v)} rx="2" fill={last ? "#a93b12" : "#121b2e"} />
+            <text x={x + bar / 2} y={y(v) - 5} textAnchor="middle" fontSize="13" fontWeight="600" fill="#121b2e">
+              {v}
+            </text>
+            <text x={x + bar / 2} y={base + 18} textAnchor="middle" fontSize="12" fill="#596070">
+              Wk {i + 1}
+            </text>
+          </g>
+        );
+      })}
+    </svg>
   );
 }
 
@@ -78,7 +185,6 @@ const activity = [
   ["Waitlist call: patient accepted Thu 2 pm", "Confirmed"],
   ["Insurance verified: active coverage", "Verified"],
   ["Intake completed before visit", "Complete"],
-  ["Reminder sent for Fri 10 am", "Sent"],
   ["No-show slot refilled automatically", "Filled"],
 ] as const;
 
@@ -96,6 +202,10 @@ export function DashboardMock({ className = "" }: { className?: string }) {
           </div>
         ))}
       </dl>
+      <div className="border-b border-line px-5 pb-3 pt-4">
+        <p className="t-eyebrow mb-2 text-subtle">Slots filled per week</p>
+        <SlotsChart />
+      </div>
       <ul>
         {activity.map(([text, status]) => (
           <li key={text} className="flex items-center justify-between gap-4 border-b border-line px-5 py-3 text-base last:border-0">
@@ -122,18 +232,27 @@ const log: { t: string; text: string; chip?: { tone: "amber" | "ok"; label: stri
   { t: "10:04", text: "Intake link and reminder sent" },
 ];
 
-/** The hero screen: one slot, its ranked waitlist and the activity that filled it. */
+/** The hero screen: one slot, a call in progress, its ranked waitlist and the activity that filled it. */
 export function FrontDeskMock({ className = "" }: { className?: string }) {
   return (
     <Window title="Front desk · Thursday" tag="Sample data" className={className}>
       <div className="flex items-center justify-between gap-4 border-b border-line px-5 py-4">
         <div>
-          <p className="text-xs font-medium text-subtle">Appointment</p>
-          <p className="font-display text-xl font-semibold">Thu 2:00 PM · Dr. Example</p>
+          <p className="t-eyebrow text-[0.6875rem] text-subtle">Appointment</p>
+          <p className="font-display text-xl">Thu 2:00 PM · Dr. Example</p>
         </div>
         <Chip tone="ok" check>
           Filled
         </Chip>
+      </div>
+
+      <div className="flex items-center gap-4 bg-ink px-5 py-3 text-white">
+        <span className="flex items-center gap-2 text-sm font-semibold">
+          <span aria-hidden="true" className="size-2.5 rounded-full bg-accent-bright" />
+          Calling Patient C
+        </span>
+        <Wave className="h-7 flex-1 text-accent-bright" />
+        <span className="tnum text-sm text-white/80">00:12</span>
       </div>
 
       <p className="t-eyebrow px-5 pb-1 pt-4 text-subtle">Waitlist, ranked</p>
@@ -155,11 +274,7 @@ export function FrontDeskMock({ className = "" }: { className?: string }) {
       <p className="t-eyebrow border-t border-line bg-paper px-5 pb-1 pt-4 text-subtle">Activity</p>
       <ol className="divide-y divide-line bg-paper">
         {log.map((r, i) => (
-          <li
-            key={r.text}
-            className="log-row flex items-start gap-4 px-5 py-3 text-base"
-            style={{ "--i": i } as CSSProperties}
-          >
+          <li key={r.text} className="log-row flex items-start gap-4 px-5 py-3 text-base" style={{ "--i": i } as CSSProperties}>
             <span className="tnum w-11 shrink-0 pt-px text-subtle">{r.t}</span>
             <span className="flex-1 text-ink">{r.text}</span>
             {r.chip && (
