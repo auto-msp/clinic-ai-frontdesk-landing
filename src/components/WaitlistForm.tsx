@@ -59,7 +59,7 @@ export default function WaitlistForm() {
           if (error) setError("");
         }}
         onBlur={() => value && setError(validate(value))}
-        className={`min-h-12 w-full rounded-lg border bg-paper px-4 text-base text-ink placeholder:text-subtle focus:bg-surface ${error ? "border-[#b42318]" : "border-line-strong"}`}
+        className={`min-h-12 w-full rounded-md border bg-surface px-4 text-base text-ink placeholder:text-subtle focus:bg-surface ${error ? "border-[#b42318]" : "border-subtle focus:border-ink"}`}
       />
       <p id={helpId} className="mt-2 text-sm text-subtle">
         We&apos;ll use it only to reply about your demo.
@@ -70,7 +70,7 @@ export default function WaitlistForm() {
 
       <button
         type="submit"
-        className="mt-3 inline-flex min-h-12 w-full items-center justify-center rounded-lg bg-accent px-6 text-base font-semibold text-white transition-colors duration-150 hover:bg-accent-hover sm:w-auto"
+        className="mt-3 inline-flex min-h-12 w-full items-center justify-center rounded-md bg-accent px-6 text-base font-semibold text-white transition-colors duration-150 hover:bg-accent-hover sm:w-auto"
       >
         Request a demo
       </button>

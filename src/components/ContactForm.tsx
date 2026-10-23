@@ -18,7 +18,7 @@ function validate(v: Values): Errors {
 }
 
 const inputCls = (err?: string) =>
-  `min-h-12 w-full rounded-lg border bg-paper px-4 text-base text-ink placeholder:text-subtle focus:bg-surface ${err ? "border-[#b42318]" : "border-line-strong"}`;
+  `min-h-12 w-full rounded-md border bg-surface px-4 text-base text-ink placeholder:text-subtle focus:bg-surface ${err ? "border-[#b42318]" : "border-subtle focus:border-ink"}`;
 
 /**
  * Front-end only. Replace the success branch of `onSubmit` with a call to your
@@ -99,7 +99,7 @@ export default function ContactForm() {
       </div>
       <button
         type="submit"
-        className="mt-5 inline-flex min-h-12 w-full items-center justify-center rounded-lg bg-accent px-6 text-base font-semibold text-white transition-colors duration-150 hover:bg-accent-hover sm:w-auto sm:justify-self-start"
+        className="mt-5 inline-flex min-h-12 w-full items-center justify-center rounded-md bg-accent px-6 text-base font-semibold text-white transition-colors duration-150 hover:bg-accent-hover sm:w-auto sm:justify-self-start"
       >
         Send request
       </button>

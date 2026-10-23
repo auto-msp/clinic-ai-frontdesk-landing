@@ -46,7 +46,7 @@ export function Section({
 }) {
   const tones = {
     plain: "bg-paper",
-    tint: "bg-surface border-y border-line",
+    tint: "bg-paper-2",
     ink: "on-ink bg-ink text-white",
   } as const;
   const spaces = {
@@ -174,10 +174,10 @@ export function Window({
   className?: string;
 }) {
   return (
-    <figure className={`overflow-hidden rounded-xl border border-line bg-surface text-ink shadow-window ${className}`}>
-      <figcaption className="flex items-center justify-between gap-4 border-b border-line bg-paper px-5 py-3.5 text-sm">
-        <span className="font-semibold text-ink">{title}</span>
-        <span className="rounded-full border border-line-strong px-2.5 py-0.5 text-xs font-medium text-subtle">{tag}</span>
+    <figure className={`overflow-hidden rounded-md border border-ink bg-surface text-ink shadow-window ${className}`}>
+      <figcaption className="flex items-center justify-between gap-4 bg-ink px-5 py-3 text-sm">
+        <span className="font-semibold text-white">{title}</span>
+        <span className="t-eyebrow rounded-sm border border-white/35 px-2 py-0.5 text-[0.6875rem] text-white/85">{tag}</span>
       </figcaption>
       {children}
     </figure>
@@ -196,7 +196,7 @@ export function Row({ k, v }: { k: string; v: ReactNode }) {
 const chipTones = {
   ok: "bg-ok-soft text-ok",
   amber: "bg-amber-soft text-amber",
-  neutral: "bg-paper text-subtle ring-1 ring-inset ring-line",
+  neutral: "bg-paper-2 text-subtle ring-1 ring-inset ring-line-strong",
 } as const;
 
 /** Status chip. Always carries a text label, so colour is never the only signal. */
@@ -211,7 +211,7 @@ export function Chip({
 }) {
   return (
     <span
-      className={`inline-flex items-center gap-1 whitespace-nowrap rounded-full px-2.5 py-0.5 text-xs font-semibold ${chipTones[tone]}`}
+      className={`t-eyebrow inline-flex items-center gap-1 whitespace-nowrap rounded-sm px-2 py-0.5 text-[0.6875rem] tracking-[0.06em] ${chipTones[tone]}`}
     >
       {check && <CheckIcon className="size-3.5" strokeWidth={2.5} />}
       {children}
@@ -233,12 +233,12 @@ export function ButtonLink({
   const v =
     variant === "primary"
       ? "bg-accent text-white hover:bg-accent-hover"
-      : "border border-line-strong bg-surface text-ink hover:border-ink";
+      : "border border-ink bg-transparent text-ink hover:bg-ink hover:text-white";
   const Cmp = href.startsWith("/") ? Link : "a";
   return (
     <Cmp
       href={href}
-      className={`group inline-flex min-h-12 items-center justify-center gap-2 rounded-lg px-6 text-base font-semibold transition-colors duration-150 active:translate-y-px ${v}`}
+      className={`group inline-flex min-h-12 items-center justify-center gap-2 rounded-md px-6 text-base font-semibold transition-colors duration-150 active:translate-y-px ${v}`}
     >
       {children}
       {arrow && <ArrowRightIcon className="size-4 transition-transform duration-150 group-hover:translate-x-0.5" />}

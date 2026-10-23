@@ -15,8 +15,7 @@ function Wordmark({ onClick }: { onClick?: () => void }) {
       className="flex min-h-11 shrink-0 items-center gap-2.5 font-display text-xl font-semibold tracking-tight text-ink"
     >
       <svg viewBox="0 0 28 28" className="size-7" aria-hidden="true" focusable="false">
-        <rect width="28" height="28" rx="7" fill="#0b7a75" />
-        <path d="M9 8.5 14 15l5-6.5M14 15v5.5" fill="none" stroke="#fff" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+        <rect width="28" height="28" rx="6" fill="#121b2e"/><path d="M8.5 8 14 15.5 19.5 8" fill="none" stroke="#f6f1e8" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 15.5V21" fill="none" stroke="#f6f1e8" stroke-width="2.6" stroke-linecap="round"/><circle cx="21.5" cy="21" r="2.4" fill="#e0743f"/>
       </svg>
       YourBrand
     </Link>
@@ -175,7 +174,7 @@ export default function Header() {
                     <ul
                       id={`menu-${slug(item.label)}`}
                       onKeyDown={(e) => moveInMenu(e, item.label)}
-                      className="absolute left-0 top-full mt-1 w-[21rem] rounded-xl border border-line bg-surface p-2 shadow-window"
+                      className="absolute left-0 top-full mt-1 w-[21rem] rounded-md border border-ink bg-surface p-2 shadow-window"
                     >
                       {item.children.map((c) => (
                         <li key={c.href}>
@@ -183,7 +182,7 @@ export default function Header() {
                             href={c.href}
                             onClick={closeAll}
                             aria-current={pathname === c.href ? "page" : undefined}
-                            className="block rounded-lg px-3 py-2.5 hover:bg-paper aria-[current=page]:bg-accent-soft"
+                            className="block rounded px-3 py-2.5 hover:bg-paper aria-[current=page]:bg-accent-soft"
                           >
                             <span className="block font-semibold text-ink">{c.title}</span>
                             <span className="block text-sm text-subtle">{c.desc}</span>
@@ -234,7 +233,7 @@ export default function Header() {
             <Link
               href="/contact"
               onClick={closeAll}
-              className="flex min-h-12 items-center justify-center rounded-lg bg-accent text-base font-semibold text-white hover:bg-accent-hover"
+              className="flex min-h-12 items-center justify-center rounded-md bg-accent text-base font-semibold text-white hover:bg-accent-hover"
             >
               Join Waitlist
             </Link>
@@ -272,7 +271,7 @@ export default function Header() {
                               href={c.href}
                               onClick={closeAll}
                               aria-current={pathname === c.href ? "page" : undefined}
-                              className="flex min-h-12 flex-col justify-center rounded-lg px-3 text-base hover:bg-surface aria-[current=page]:bg-accent-soft"
+                              className="flex min-h-12 flex-col justify-center rounded px-3 text-base hover:bg-surface aria-[current=page]:bg-accent-soft"
                             >
                               <span className="font-semibold text-ink">{c.title}</span>
                               <span className="text-sm font-normal text-subtle">{c.desc}</span>
