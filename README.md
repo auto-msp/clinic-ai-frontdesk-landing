@@ -1,16 +1,38 @@
-# Clinic AI front-desk landing page (template)
+# Clinic AI Front Desk: landing page template
 
-Static site, no build step. Open `index.html` in a browser, or serve it:
+A single-page marketing site for an AI front-desk product aimed at clinics (call answering, scheduling, intake, and automatic waitlist refills).
 
-```powershell
-cd "C:\Users\MoizContractor\Downloads\Rea - EzziFlow Clone\ezziflow-clone"
-python -m http.server 8080
+Built with Next.js 16 (App Router, Cache Components), React 19 and Tailwind CSS 4.
+
+## Run it
+
+```bash
+npm install
+npm run dev      # http://localhost:3000
+npm run lint
+npm run build && npm run start
 ```
 
-Then visit http://localhost:8080
+Requires Node 20.9 or newer.
 
-## Notes
-- Layout, section order, palette (navy / teal / sky) and Inter font follow the reference site.
-- Copy is original placeholder wording. Logo and hero image are placeholders.
-- The waitlist form is front-end only; wire it to your backend or CRM.
-- Replace the security section with claims you can actually back up.
+## Structure
+
+| Path | What it holds |
+| --- | --- |
+| `src/app/layout.tsx` | Fonts, metadata, Open Graph tags |
+| `src/app/page.tsx` | Page composition, section order |
+| `src/app/globals.css` | Tailwind theme tokens (navy, teal, sky), scroll reveal |
+| `src/components/Sections.tsx` | All content sections after the hero |
+| `src/components/ui.tsx` | Shared layout and mock-up pieces |
+| `src/components/Header.tsx` | Sticky nav with mobile menu (client component) |
+| `src/components/Counter.tsx` | Dashboard count-up (client component) |
+| `src/components/WaitlistForm.tsx` | Waitlist email form (client component) |
+| `legacy-static/` | The original plain HTML/CSS/JS version, kept for reference |
+
+## Before launch
+
+- Replace the `YourBrand` wordmark, hero placeholder and all copy with your own.
+- `WaitlistForm` is front-end only. Wire `onSubmit` to your CRM or a server action.
+- The Security section is generic. Only claim certifications you hold.
+- `robots` is set to `noindex` in `layout.tsx`. Remove it when the page carries real branding.
+- Do not reuse any other company's name, logo, imagery or marketing text.
