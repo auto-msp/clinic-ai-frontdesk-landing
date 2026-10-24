@@ -38,6 +38,10 @@ Requires Node 20.9 or newer.
 
 The UI follows the UI/UX Pro Max skill (kept in `.claude/skills/ui-ux-pro-max`): calm, minimal, one accent colour, hairline rules instead of boxed cards, no gradients or emoji. Every colour pair meets WCAG AA, controls are at least 44px tall, every input has a visible label, and motion respects `prefers-reduced-motion`. Product mock-ups are always labelled as sample data.
 
+## MCP servers (optional)
+
+`.mcp.json` registers the 21st.dev Magic MCP server (`@21st-dev/magic`) for Claude Code sessions, including cloud sessions. It reads the key from the `TWENTYFIRST_API_KEY` environment variable. Never put the key in this repo. For a cloud session, set it in the cloud environment's variables at claude.ai/code and allow the 21st.dev domains in that environment's network settings. Locally, export it in your shell before starting Claude Code. Components from the server come from different authors, so check each licence and adapt them to this site's design tokens before use.
+
 ## Before launch
 
 - Replace the `YourBrand` wordmark, favicon (`src/app/icon.svg`) and all copy with your own.
