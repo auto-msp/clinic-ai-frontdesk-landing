@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import ContactForm from "./ContactForm";
-import { CheckIcon, ChevronDownIcon } from "./icons";
+import { CheckIcon } from "./icons";
 import { Block, PageData, defaultClosing, pages } from "@/content/pages";
 import { CoverageDiagram, DataPathDiagram, GanttDiagram, HubDiagram, IntakeFormDiagram, LayersDiagram, QuoteDiagram } from "./Illustrations";
 import { FrontDeskMock } from "./Mockups";
+import Accordion from "./motion/Accordion";
 import { Layout, StepKind, layouts } from "./pageLayouts";
 import { Dashboard, NoShow, Receptionist, Scheduling, WaitlistCalling } from "./Sections";
 import { ButtonLink, Checks, Container, Editorial, H2, Label, Lead, LinkRows, Row, Section, Steps, TwoCol, Window } from "./ui";
@@ -261,17 +262,7 @@ function renderBlock(b: Block, tone: Tone, key: number, ctx: Ctx) {
               </div>
             }
           >
-            <div className="border-t border-ink">
-              {b.items.map((f) => (
-                <details key={f.q} className="group border-b border-line">
-                  <summary className="flex min-h-16 list-none items-center justify-between gap-6 py-4 font-display text-xl leading-snug text-ink [&::-webkit-details-marker]:hidden">
-                    {f.q}
-                    <ChevronDownIcon className="size-6 shrink-0 text-subtle transition-transform duration-200 group-open:rotate-180" />
-                  </summary>
-                  <p className="max-w-[60ch] pb-6 text-body">{f.a}</p>
-                </details>
-              ))}
-            </div>
+            <Accordion items={b.items.map((f, i) => ({ id: String(i), title: f.q, content: f.a }))} />
           </Editorial>
         </Section>
       );

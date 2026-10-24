@@ -1,5 +1,5 @@
 import Link from "next/link";
-import type { CSSProperties, ReactNode } from "react";
+import type { ReactNode } from "react";
 import { ArrowRightIcon, CheckIcon } from "./icons";
 
 export function Container({ children, className = "" }: { children: ReactNode; className?: string }) {
@@ -108,58 +108,7 @@ export function Checks({ items, dark = false }: { items: string[]; dark?: boolea
   );
 }
 
-export type Step = { title: string; sub?: string };
-
-/**
- * Process timeline. `row` runs left to right from md up (vertical on phones);
- * `column` is always a vertical timeline. Both end on a node, not a line.
- */
-export function Steps({
-  steps,
-  label,
-  dark = false,
-  layout = "row",
-}: {
-  steps: Step[];
-  label?: string;
-  dark?: boolean;
-  layout?: "row" | "column";
-}) {
-  const num = dark ? "text-accent-bright" : "text-accent";
-  const title = dark ? "text-white" : "text-ink";
-  const sub = dark ? "text-white/75" : "text-subtle";
-  const line = dark ? "before:bg-white/25" : "before:bg-line-strong";
-  const dot = dark ? "bg-accent-bright" : "bg-accent";
-
-  return (
-    <div>
-      {label && <p className={`t-eyebrow mb-6 ${dark ? "text-white/75" : "text-subtle"}`}>{label}</p>}
-      <ol
-        style={{ "--n": steps.length } as CSSProperties}
-        className={layout === "row" ? "md:grid md:grid-cols-[repeat(var(--n),minmax(0,1fr))]" : ""}
-      >
-        {steps.map((s, i) => (
-          <li
-            key={s.title}
-            className={`relative pb-8 pl-9 last:pb-0 before:absolute before:left-[0.4375rem] before:top-4 before:bottom-[-0.25rem] before:w-px last:before:hidden ${line} ${
-              layout === "row"
-                ? "md:pb-0 md:pl-0 md:pr-6 md:pt-9 md:before:left-4 md:before:right-0 md:before:top-[0.4375rem] md:before:bottom-auto md:before:h-px md:before:w-auto"
-                : ""
-            }`}
-          >
-            <span
-              aria-hidden="true"
-              className={`absolute left-0 top-1.5 size-3.5 rounded-full ${dot} ${layout === "row" ? "md:top-0" : ""}`}
-            />
-            <span className={`t-num text-sm ${num}`}>{String(i + 1).padStart(2, "0")}</span>
-            <p className={`t-h3 mt-1 ${title}`}>{s.title}</p>
-            {s.sub && <p className={`mt-1 text-[0.9375rem] ${sub}`}>{s.sub}</p>}
-          </li>
-        ))}
-      </ol>
-    </div>
-  );
-}
+export { default as Steps, type Step } from "./motion/Steps";
 
 /** Product mock-up frame. Always labelled so nobody mistakes it for real data. */
 export function Window({
