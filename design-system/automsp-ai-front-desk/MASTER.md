@@ -1,18 +1,12 @@
-# AutoMSP AI Front Desk — design system
+# AutoMSP AI Front Desk — final integrated design
 
-Applied UI UX Pro Max from https://github.com/nextlevelbuilder/ui-ux-pro-max-skill.
+UI UX Pro Max was read and its design-system and Next.js searches were run. The initial branch proposed a green minimal SaaS direction. On resuming, main had received UI passes 2–4 with individual page layouts, illustrations, mockups, keyboard-navigation improvements, and an Ink & Clay design system. The integration preserves those newer decisions rather than overwriting them.
 
-## Research and selection
-Ran `healthcare SaaS professional minimal --design-system`; rejected the wellness/neumorphism direction as a poor product fit. Narrowed to `B2B SaaS minimal --design-system`, which returned Hero + Features + CTA and a professional SaaS hierarchy. Also ran `navigation links image --stack nextjs` against the detected Next.js 16.4.2 stack. Read the skill and professional review checklist.
+## Final design
+Keep main’s Calistoga / Inter / JetBrains Mono type system, cream surfaces, navy ink and clay accent. Keep all page-specific layouts and product mockups. Add the supplied light-theme logo (without domain suffix), a readable AutoMSP AI Front Desk wordmark and an A favicon. Preserve dedicated routes and responsive menus.
 
-## Deliberate adaptations
-Use the recommended concise hero/features/CTA structure and Next Link/Image guidance. Retain the existing Figtree/Noto Sans pairing to avoid unnecessary font churn. Use solid surfaces instead of glass effects for legibility. Adopt a muted green accent inspired by the supplied logo, rather than the generic blue/orange palette. No fabricated testimonials, certification badges or outcomes.
+## Booking and truthful states
+All primary demo actions use one validated HTTPS NEXT_PUBLIC_BOOKING_URL. Without it, they lead to /book-demo with a clear booking-pending state. No fake form success or placeholder email/phone details. Example results remain labelled; security requirements and pending legal content are explicit.
 
-## Tokens and hierarchy
-Paper #f7faf8, white surfaces, ink #142d28, body #465a54, muted #5c6c65, accent #176344, hover #104a32. Hero illustration uses clearly labelled sample data. Full unmodified light logo appears in header/footer, paired with a readable product wordmark. Desktop content width 1120px; 20/32px gutters. 44px minimum main controls. Focus rings and reduced motion supported.
-
-## Navigation
-Product, Solutions, Security, Pricing, About. Nested content retains independent routes. Demo actions resolve to a single validated HTTPS booking URL or the honest booking-pending page. Skip link is the only intended hash link in global navigation.
-
-## Launch requirements
-Set NEXT_PUBLIC_BOOKING_URL to the actual HTTPS booking URL in Vercel, then rebuild. Confirm product capabilities, supported integrations, privacy policy and service terms before production. Keep demo indexing disabled until review is complete.
+## Validation and launch
+Lint and production build must pass on the integrated tree. Verify navigation, focus, mobile layout, routes and booking in the preview. Supply the real booking URL, confirm operational claims/integrations, and finalize legal content before production. Keep indexing disabled during review.
