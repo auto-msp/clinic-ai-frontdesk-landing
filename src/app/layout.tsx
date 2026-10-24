@@ -28,16 +28,16 @@ const jetbrains = JetBrains_Mono({
   preload: false,
 });
 
-const title = "YourBrand | AI Front Desk for Clinics";
+const title = "AutoMSP AI Front Desk | AI Front Desk for Clinics";
 const description =
-  "Template landing page: an AI front desk that answers calls, books visits, gathers intake and refills cancelled slots from a waitlist.";
+  "Explore an AI front desk that answers calls, books visits, gathers intake and refills cancelled slots from a waitlist.";
 
 export const metadata: Metadata = {
-  title: { default: title, template: "%s | YourBrand" },
+  title: { default: title, template: "%s | AutoMSP AI Front Desk" },
   description,
   openGraph: { title, description, type: "website" },
   twitter: { card: "summary_large_image", title, description },
-  // Template page: keep it out of search indexes until it carries real branding.
+  // Keep this demonstration out of search indexes until production review.
   robots: { index: false, follow: false },
 };
 

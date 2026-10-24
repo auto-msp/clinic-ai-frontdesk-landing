@@ -230,3 +230,19 @@ label[for] {
   }
 
 }
+
+.brand { display:flex; align-items:center; gap:10px; color:var(--color-ink); flex-shrink:0; }
+.brand-seal { width:52px; height:52px; border-radius:50%; }
+.brand strong { display:block; font-size:22px; letter-spacing:-1px; line-height:1.15; }
+.brand span span { display:block; font-size:9px; letter-spacing:1.8px; font-weight:700; margin-top:4px; }
+.booking-page { padding:80px 0; min-height:65vh; }
+.booking-page .eyebrow { color:var(--color-accent); font-size:12px; letter-spacing:1.5px; margin-bottom:24px; }
+.booking-page h1 { font-size:clamp(36px,5vw,60px); line-height:1.12; letter-spacing:-1px; max-width:24ch; }
+.booking-lead { font-size:18px; max-width:54ch; margin:24px 0 40px; }
+.booking-panel { display:grid; grid-template-columns:1fr 1fr; border:1px solid var(--color-ink); border-radius:6px; overflow:hidden; }
+.booking-panel>div { padding:36px; background:var(--color-surface); }
+.booking-panel>div:first-child { background:var(--color-paper-2); }
+.booking-panel h2 { font-size:24px; margin-bottom:20px; }
+.booking-panel li { margin:12px 0; }
+.booking-panel p { margin-bottom:24px; }
+@media(max-width:639px) { .booking-panel { grid-template-columns:1fr; } .booking-page { padding:48px 0; } .booking-panel>div { padding:26px; } }

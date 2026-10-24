@@ -1,4 +1,6 @@
 import Link from "next/link";
+import Image from "next/image";
+import { demoHref } from "@/content/site";
 import { cacheLife } from "next/cache";
 import { legal, nav } from "@/content/nav";
 import { Container } from "./ui";
@@ -24,20 +26,16 @@ export default async function Footer() {
       <Container>
         <div className="grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-[1.5fr_repeat(4,1fr)]">
           <div className="sm:col-span-2 lg:col-span-1">
-            <p className="flex items-center gap-2.5 font-display text-xl font-semibold text-ink">
-              <svg viewBox="0 0 28 28" className="size-7" aria-hidden="true" focusable="false">
-                <rect width="28" height="28" rx="6" fill="#121b2e"/><path d="M8.5 8 14 15.5 19.5 8" fill="none" stroke="#f6f1e8" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 15.5V21" fill="none" stroke="#f6f1e8" stroke-width="2.6" stroke-linecap="round"/><circle cx="21.5" cy="21" r="2.4" fill="#e0743f"/>
-              </svg>
-              YourBrand
-            </p>
+            <Image src="/brand/automsp-light.png" alt="AutoMSP — AI Automation Services" width={156} height={156} className="mb-4 rounded-full" />
+            <p className="font-display text-xl text-ink">AutoMSP AI Front Desk</p>
             <p className="mt-4 max-w-[30ch] text-base text-body">
               An AI front desk that answers calls, books visits and refills cancelled slots.
             </p>
             <Link
-              href="/contact"
+              href={demoHref}
               className="mt-5 inline-flex min-h-11 items-center rounded-md border border-ink px-4 text-[0.95rem] font-semibold text-ink transition-colors hover:bg-ink hover:text-white"
             >
-              Join the waitlist
+              Book a demo
             </Link>
           </div>
           {groups.map((col) => (
@@ -56,7 +54,7 @@ export default async function Footer() {
           ))}
         </div>
         <div className="mt-14 flex flex-wrap items-center justify-between gap-x-6 gap-y-1 border-t border-line pt-6">
-          <p>© {new Date().getFullYear()} YourBrand. Template, not an official site.</p>
+          <p>© {new Date().getFullYear()} AutoMSP. All rights reserved.</p>
           <ul className="flex flex-wrap gap-x-6">
             {legal.map((l) => (
               <li key={l.href}>
@@ -66,7 +64,7 @@ export default async function Footer() {
               </li>
             ))}
           </ul>
-          <p className="w-full">Replace the placeholder contact details and legal pages before launch.</p>
+          <p className="w-full">AI automation for a more connected front desk.</p>
         </div>
       </Container>
     </footer>

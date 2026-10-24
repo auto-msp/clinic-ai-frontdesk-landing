@@ -1,26 +1,13 @@
 "use client";
 
 import Link from "next/link";
+import Brand from "./Brand";
+import { demoHref } from "@/content/site";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState, type KeyboardEvent } from "react";
 import { home, nav, type NavItem } from "@/content/nav";
 import { ChevronDownIcon, CloseIcon, MenuIcon } from "./icons";
 import { ButtonLink } from "./ui";
-
-function Wordmark({ onClick }: { onClick?: () => void }) {
-  return (
-    <Link
-      href="/"
-      onClick={onClick}
-      className="flex min-h-11 shrink-0 items-center gap-2.5 font-display text-xl font-semibold tracking-tight text-ink"
-    >
-      <svg viewBox="0 0 28 28" className="size-7" aria-hidden="true" focusable="false">
-        <rect width="28" height="28" rx="6" fill="#121b2e"/><path d="M8.5 8 14 15.5 19.5 8" fill="none" stroke="#f6f1e8" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 15.5V21" fill="none" stroke="#f6f1e8" stroke-width="2.6" stroke-linecap="round"/><circle cx="21.5" cy="21" r="2.4" fill="#e0743f"/>
-      </svg>
-      YourBrand
-    </Link>
-  );
-}
 
 const isActive = (pathname: string, href: string) => (href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(href + "/"));
 const groupActive = (pathname: string, item: NavItem) => "children" in item && item.children.some((c) => c.href === pathname);
@@ -149,7 +136,7 @@ export default function Header() {
   return (
     <header ref={headerRef} onKeyDown={trapTab} className="sticky top-0 z-50 border-b border-line bg-paper">
       <div className="relative mx-auto flex h-[68px] w-full max-w-[1360px] items-center justify-between gap-4 px-5 sm:px-8">
-        <Wordmark onClick={closeAll} />
+        <Brand onClick={closeAll} />
 
         <nav ref={navRef} aria-label="Main" className="hidden lg:block">
           <ul className="flex items-center">
@@ -209,7 +196,7 @@ export default function Header() {
         </nav>
 
         <div className="hidden shrink-0 lg:block">
-          <ButtonLink href="/contact">Join Waitlist</ButtonLink>
+          <ButtonLink href={demoHref}>Book a demo</ButtonLink>
         </div>
 
         <button
@@ -231,11 +218,11 @@ export default function Header() {
             className="fixed inset-x-0 top-[68px] h-[calc(100dvh-68px)] overflow-y-auto overscroll-contain border-t border-line bg-paper px-5 pb-10 pt-4 sm:px-8 lg:hidden"
           >
             <Link
-              href="/contact"
+              href={demoHref}
               onClick={closeAll}
               className="flex min-h-12 items-center justify-center rounded-md bg-accent text-base font-semibold text-white hover:bg-accent-hover"
             >
-              Join Waitlist
+              Book a demo
             </Link>
             <ul className="mt-2 text-lg font-medium text-ink">
               <li className="border-b border-line">

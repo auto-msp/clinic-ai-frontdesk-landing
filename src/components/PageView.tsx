@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import ContactForm from "./ContactForm";
-import { CheckIcon, ChevronDownIcon } from "./icons";
+import { demoHref } from "@/content/site";
+import { ChevronDownIcon } from "./icons";
 import { Block, PageData, defaultClosing, pages } from "@/content/pages";
 import { CoverageDiagram, DataPathDiagram, GanttDiagram, HubDiagram, IntakeFormDiagram, LayersDiagram, QuoteDiagram } from "./Illustrations";
 import { FrontDeskMock } from "./Mockups";
@@ -334,24 +335,7 @@ function renderBlock(b: Block, tone: Tone, key: number, ctx: Ctx) {
               <Label>Schedule a consultation</Label>
               <H2>Tell us about your clinic</H2>
               <Lead>A few details are enough to start. We&apos;ll follow up with questions only if we need them.</Lead>
-              <dl className="mt-10 divide-y divide-line border-y border-line text-base">
-                <div className="flex flex-wrap justify-between gap-x-6 py-4">
-                  <dt className="font-semibold text-ink">Email</dt>
-                  <dd className="text-body">hello@yourbrand.example</dd>
-                </div>
-                <div className="flex flex-wrap justify-between gap-x-6 py-4">
-                  <dt className="font-semibold text-ink">Phone</dt>
-                  <dd className="tnum text-body">+1 555 0100</dd>
-                </div>
-                <div className="flex flex-wrap justify-between gap-x-6 py-4">
-                  <dt className="font-semibold text-ink">Hours</dt>
-                  <dd className="text-body">Monday to Friday, 9:00 AM to 6:00 PM</dd>
-                </div>
-              </dl>
-              <p className="mt-6 flex items-start gap-2 text-sm text-subtle">
-                <CheckIcon className="mt-0.5 size-4 shrink-0" />
-                Placeholder contact details. Replace them before launch.
-              </p>
+
             </div>
             <div className="rounded-md border border-ink bg-surface p-6 shadow-window sm:p-8">
               <h2 className="t-h3">Request information</h2>
@@ -397,7 +381,7 @@ function visualFor(layout: Layout, page: PageData): ReactNode {
 function Notice({ text }: { text: string }) {
   return (
     <p role="note" className="mt-8 max-w-[62ch] border-l-2 border-amber bg-amber-soft px-4 py-3 text-sm text-ink">
-      <strong className="font-semibold">Template note: </strong>
+      <strong className="font-semibold">Please note: </strong>
       {text}
     </p>
   );
@@ -490,8 +474,8 @@ export default function PageView({ slug }: { slug: string }) {
               <p className="t-lead max-w-[46ch] text-white/85">{closing.body}</p>
             </div>
             <div className="flex flex-wrap gap-3 lg:justify-end">
-              <ButtonLink href={closing.primary.href} arrow>
-                {closing.primary.label}
+              <ButtonLink href={closing.primary.href === "/contact" ? demoHref : closing.primary.href} arrow>
+                {closing.primary.href === "/contact" ? "Book a demo" : closing.primary.label}
               </ButtonLink>
               {closing.secondary && (
                 <ButtonLink href={closing.secondary.href} variant="secondary">

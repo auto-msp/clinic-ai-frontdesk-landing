@@ -1,6 +1,6 @@
 /**
  * Copy for every inner page. All wording is original template text for the
- * placeholder "YourBrand" product: replace it with your own before launch.
+ * AutoMSP AI Front Desk demonstration. Confirm deployment capabilities before launch.
  * Anything resembling a result, customer or certification is illustrative.
  */
 
@@ -42,7 +42,7 @@ export type PageData = {
 const defaultClosing: NonNullable<PageData["closing"]> = {
   title: "See it with your own call volume",
   body: "Tell us about your clinic and we'll walk through how the front desk would run with an assistant on the phones.",
-  primary: { href: "/contact", label: "Join the waitlist" },
+  primary: { href: "/contact", label: "Book a demo" },
   secondary: { href: "/product", label: "Explore the product" },
 };
 
@@ -235,25 +235,25 @@ export const pages: Record<string, PageData> = {
 
   security: {
     title: "Security",
-    description: "How the platform is designed to protect patient information.",
+    description: "Security considerations to review before deploying a clinic front-desk workflow.",
     label: "Security",
-    h1: "How patient information is protected",
+    h1: "Plan for patient information protection",
     lead: "Healthcare data deserves defaults that are strict from the start, not settings someone has to remember to turn on.",
     notice:
-      "Template copy. Replace this page with your real security and compliance posture, and only claim certifications you actually hold.",
+      "Security requirements are assessed for each deployment. This demo does not establish certification, regulatory compliance or approval to process patient information.",
     blocks: [
       {
         kind: "features",
         label: "Safeguards",
-        title: "Designed for regulated environments",
+        title: "Security requirements to review",
         cols: 2,
         items: [
-          { title: "Encrypted communication", body: "Data is encrypted in transit between callers, the assistant and your systems." },
-          { title: "Secure cloud infrastructure", body: "Hosted on reputable cloud infrastructure with network-level isolation." },
-          { title: "Protected data storage", body: "Patient data is encrypted at rest and kept only as long as it is needed." },
-          { title: "Access control", body: "Role-based permissions and strong authentication for everyone who signs in." },
+          { title: "Encrypted communication", body: "Review encryption across the selected telephony, application and integration providers." },
+          { title: "Secure cloud infrastructure", body: "Assess hosting, network isolation and provider responsibilities before deployment." },
+          { title: "Protected data storage", body: "Confirm encryption at rest, retention periods and deletion procedures for each data store." },
+          { title: "Access control", body: "Define staff permissions, authentication and account removal procedures." },
           { title: "Controlled production", body: "Changes reach production through a reviewed, repeatable process." },
-          { title: "Audit visibility", body: "System actions are logged so you can see what happened and when." },
+          { title: "Audit visibility", body: "Agree on audit records, access to logs and monitoring responsibilities." },
           { title: "Safe scheduling design", body: "The assistant collects only what a visit needs and hands clinical questions to staff." },
           { title: "Data minimization", body: "Less data collected means less data to protect." },
         ],
@@ -301,7 +301,7 @@ export const pages: Record<string, PageData> = {
     h1: "Recovering revenue from cancellations",
     lead: "A walk-through of how one kind of clinic could measure the effect of an AI front desk.",
     notice:
-      "Illustrative scenario with example numbers, not a real customer. Replace it with a real, approved story before sharing it with prospects.",
+      "Illustrative workflow, not a customer testimonial or measured performance result.",
     blocks: [
       {
         kind: "split",
@@ -330,16 +330,16 @@ export const pages: Record<string, PageData> = {
       },
       {
         kind: "metrics",
-        label: "Results after 60 days",
+        label: "Pilot measurement plan",
         title: "The kind of numbers to track",
-        intro: "These figures are examples of the measures worth reporting, not claims.",
+        intro: "Agree on these measures before a pilot. Results depend on call volume, patient availability and implementation.",
         items: [
-          { value: "00%", label: "Cancelled slots refilled" },
-          { value: "0 min", label: "Median time to refill" },
-          { value: "00 hrs", label: "Front-desk call time saved per week" },
-          { value: "$0,000", label: "Revenue recovered per month" },
+          { value: "Fill rate", label: "Cancelled slots refilled" },
+          { value: "Time", label: "Median time to refill" },
+          { value: "Hours", label: "Front-desk call time saved per week" },
+          { value: "Revenue", label: "Revenue recovered per month" },
         ],
-        note: "Fill these in with your own measured results.",
+        note: "Establish a baseline before the pilot and review measured outcomes with your team.",
       },
     ],
   },
@@ -350,7 +350,7 @@ export const pages: Record<string, PageData> = {
     label: "Pricing",
     h1: "Pricing scoped to your clinic",
     lead: "Every practice runs differently, so pricing starts with a short conversation about how yours does.",
-    notice: "Template page. Add your real plans and prices here, or keep it as a talk-to-us page.",
+    notice: "Your proposal will define scope, integrations and pricing before work begins.",
     blocks: [
       {
         kind: "features",
@@ -465,7 +465,7 @@ export const pages: Record<string, PageData> = {
     label: "About",
     h1: "Operational stability for healthcare practices",
     lead: "We build software that takes repetitive phone work off clinic staff, carefully and with patient trust in mind.",
-    notice: "Template copy. Replace with your own mission, story and facts.",
+    notice: "AutoMSP AI Front Desk is part of AutoMSP AI Automation Services.",
     blocks: [
       {
         kind: "split",
@@ -474,7 +474,7 @@ export const pages: Record<string, PageData> = {
         body: "Front desks are asked to answer phones, check people in, chase paperwork and fix the schedule, all at once. We exist to take the routine part of that off their plate.",
         checks: ["Fewer missed calls", "Fewer empty appointment slots", "Less after-hours admin"],
         panelTitle: "At a glance",
-        panelTag: "Template",
+        panelTag: "AutoMSP",
         rows: [
           ["Focus", "Clinic front desks"],
           ["Approach", "Structured, staged rollouts"],
@@ -501,7 +501,7 @@ export const pages: Record<string, PageData> = {
     label: "Leadership",
     h1: "A structured vision for healthcare operations",
     lead: "The people responsible for the product, and what they've committed to.",
-    notice: "Template page. Add your real team, names and photos here, with their permission.",
+    notice: "Meet the people responsible for your implementation during your consultation.",
     blocks: [
       {
         kind: "features",
@@ -565,7 +565,7 @@ export const pages: Record<string, PageData> = {
     label: "Integrations",
     h1: "Designed to work within your existing systems",
     lead: "The assistant plugs into the tools your clinic already uses, rather than asking you to replace them.",
-    notice: "Template copy. List only the systems you actually support.",
+    notice: "Compatibility is confirmed during discovery. No specific vendor integration is guaranteed by this demo.",
     blocks: [
       {
         kind: "features",
@@ -576,7 +576,7 @@ export const pages: Record<string, PageData> = {
           { title: "Calendar systems", body: "Reads availability and writes bookings so the schedule is always the source of truth." },
           { title: "Records systems", body: "Sends structured intake and appointment details into the patient record." },
           { title: "Communication providers", body: "Works with your phone numbers and messaging so patients see a familiar caller." },
-          { title: "API availability", body: "A documented API for custom workflows and reporting." },
+          { title: "API availability", body: "Assess API availability and permissions for custom workflows and reporting." },
         ],
       },
     ],
@@ -611,46 +611,23 @@ export const pages: Record<string, PageData> = {
   },
 
   "privacy-policy": {
-    title: "Privacy Policy",
-    description: "Template privacy policy page.",
-    label: "Legal",
-    h1: "Privacy Policy",
-    lead: "How this site handles information you share with it.",
-    notice: "Template text only, not legal advice. Have a qualified lawyer write or review your real policy before launch.",
-    blocks: [
-      {
-        kind: "prose",
-        sections: [
-          { h: "Information we collect", p: ["Describe the information the site collects, such as contact form submissions and basic analytics."] },
-          { h: "How we use it", p: ["Explain what you use that information for, for example replying to enquiries."] },
-          { h: "Patient information", p: ["If the product handles protected health information, describe your obligations and agreements here."] },
-          { h: "Your choices", p: ["Explain how people can ask to see, correct or delete their information."] },
-          { h: "Contact", p: ["Add a real contact address for privacy questions."] },
-        ],
-      },
-    ],
-    closing: undefined,
+    title: "Privacy information", description: "Privacy information for the AutoMSP demonstration website.",
+    label: "Privacy", h1: "Privacy information", lead: "This website demonstrates front-desk workflows using illustrative data.",
+    notice: "A complete privacy policy must be published before production launch or collection of personal information.",
+    blocks: [{ kind: "prose", sections: [
+      { h: "Demonstration data", p: ["The schedule, call activity and patient examples shown on this website are illustrative. Do not submit patient or medical information through this demo."] },
+      { h: "External booking", p: ["When booking becomes available, it will open an external scheduling provider. Review that provider’s privacy information before submitting your details."] },
+      { h: "Production deployment", p: ["Data handling, hosting, retention and the relevant agreements must be established for each clinic before a production deployment."] }
+    ] }], closing: undefined,
   },
-
   "terms-of-service": {
-    title: "Terms of Service",
-    description: "Template terms of service page.",
-    label: "Legal",
-    h1: "Terms of Service",
-    lead: "The terms for using this site and, once you have it, the service.",
-    notice: "Template text only, not legal advice. Have a qualified lawyer write or review your real terms before launch.",
-    blocks: [
-      {
-        kind: "prose",
-        sections: [
-          { h: "Using the site", p: ["Describe acceptable use of the website."] },
-          { h: "The service", p: ["Describe the service, who may use it, and any service agreement that applies."] },
-          { h: "Liability", p: ["State limits of liability as advised by your lawyer."] },
-          { h: "Changes", p: ["Explain how and when these terms may change."] },
-        ],
-      },
-    ],
-    closing: undefined,
+    title: "Demo information", description: "Scope of the AutoMSP AI Front Desk demonstration.",
+    label: "Demo information", h1: "About this demonstration", lead: "Explore the proposed experience before discussing a deployment for your practice.",
+    notice: "Production service terms are pending. This demo does not create a service agreement.",
+    blocks: [{ kind: "prose", sections: [
+      { h: "Scope", p: ["This website is a product demonstration. Its example schedules and workflows do not perform live patient calls, clinical triage or appointment booking in a clinic system."] },
+      { h: "Implementation", p: ["Availability, integrations, support arrangements and commercial terms are confirmed in a separate proposal and agreement."] }
+    ] }], closing: undefined,
   },
 };
 

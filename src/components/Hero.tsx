@@ -1,3 +1,4 @@
+import { demoHref } from "@/content/site";
 import { CheckIcon } from "./icons";
 import { FrontDeskMock } from "./Mockups";
 import { ButtonLink, Container, Steps } from "./ui";
@@ -16,10 +17,10 @@ export default function Hero() {
             rings the next person on your waitlist the moment a patient cancels.
           </p>
           <div className="mt-10 flex flex-wrap items-center gap-3">
-            <ButtonLink href="#demo" arrow>
-              Request a demo
+            <ButtonLink href={demoHref} arrow>
+              Book a demo
             </ButtonLink>
-            <ButtonLink href="#how" variant="secondary">
+            <ButtonLink href="/product" variant="secondary">
               See how it works
             </ButtonLink>
           </div>
