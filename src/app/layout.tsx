@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Calistoga, Inter, JetBrains_Mono } from "next/font/google";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
+import MotionRoot from "@/components/motion/MotionRoot";
 import "./globals.css";
 
 // Pairing from the UI/UX Pro Max typography search ("SaaS Boutique": editorial,
@@ -55,9 +56,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         >
           Skip to content
         </a>
-        <Header />
-        <main id="main">{children}</main>
-        <Footer />
+        <noscript>
+          <style>{"[data-reveal]{opacity:1!important;transform:none!important}"}</style>
+        </noscript>
+        <MotionRoot>
+          <Header />
+          <main id="main">{children}</main>
+          <Footer />
+        </MotionRoot>
       </body>
     </html>
   );

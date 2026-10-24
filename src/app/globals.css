@@ -190,20 +190,10 @@ label[for] {
   }
 }
 
-/* Motion, kept to two purposeful moments: section content easing in as it
-   enters the viewport, and the hero's activity log playing through once.
-   Both are progressive enhancements with a fully visible fallback. */
-@keyframes rise-in {
-  from {
-    opacity: 0;
-    transform: translateY(14px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
+/* Motion, kept to purposeful moments. Section reveals, the step strips, the FAQ
+   accordion and the dashboard chart are driven by `motion` (src/components/motion);
+   the hero's activity log plays through once in CSS. Everything is a progressive
+   enhancement with a fully visible fallback. */
 @keyframes log-in {
   from {
     opacity: 0;
@@ -216,17 +206,16 @@ label[for] {
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  @supports (animation-timeline: view()) {
-    .rise {
-      animation: rise-in linear forwards;
-      animation-timeline: view();
-      animation-range: entry 0% entry 30%;
-    }
-  }
-
   .log-row {
     animation: log-in 420ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
     animation-delay: calc(var(--i, 0) * 520ms + 300ms);
   }
+}
 
+/* Reduced motion: motion's inline start state is overridden so content is simply there. */
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }
